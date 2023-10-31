@@ -1,4 +1,6 @@
-﻿namespace ET
+﻿using System;
+
+namespace ET
 {
     [EnableMethod]
     public sealed class Scene: Entity
@@ -69,6 +71,11 @@
             }
 
             return entity as Scene;
+        }
+
+        public object GetComponent<T>()
+        {
+            throw new NotImplementedException();
         }
 
         public new Entity Domain

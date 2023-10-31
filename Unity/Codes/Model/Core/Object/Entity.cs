@@ -682,7 +682,7 @@ namespace ET
             c.Dispose();
         }
 
-        public K GetComponent<K>() where K : Entity
+        public K GetComponent<K>(long accountId) where K : Entity
         {
             if (this.components == null)
             {
