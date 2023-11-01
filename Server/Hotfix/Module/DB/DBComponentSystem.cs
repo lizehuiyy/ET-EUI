@@ -6,6 +6,7 @@ using MongoDB.Driver;
 namespace ET
 {
 	[FriendClass(typeof(DBComponent))]
+	[ComponentOf(typeof(Scene))]
     public static class DBComponentSystem
     {
 	    public class DBComponentAwakeSystem : AwakeSystem<DBComponent, string, string, int>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace ET
 {
     [ChildType(typeof(ServerInfo))]
+    [ComponentOf(typeof(Scene))]
     public class ServerInfoManagerComponent:Entity,IAwake,IDestroy,ILoad
     {
         public List<ServerInfo> ServerInfo = new List<ServerInfo>();

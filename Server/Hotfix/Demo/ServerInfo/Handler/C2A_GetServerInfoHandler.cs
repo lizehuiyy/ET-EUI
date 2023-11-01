@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ET
 {
+    [FriendClassAttribute(typeof(ET.ServerInfoManagerComponent))]
     public class C2A_GetServerInfoHandler : AMRpcHandler<C2A_GetServerInfo, A2C_GetServerInfo>
     {
         protected override async ETTask Run(Session session, C2A_GetServerInfo request, A2C_GetServerInfo response, Action reply)
@@ -17,7 +18,7 @@ namespace ET
                 return;
             }
 
-            //string token = session.DomainScene().GetComponent<TokenComponent>()
+            string token = session.DomainScene().GetComponent<TokenComponent>().Get(request.AccountId);
 
             if (token == null || token != request.Token)
             {
@@ -26,9 +27,12 @@ namespace ET
                 session.Dispose();
                 return;
             }
+            foreach (var serverInfo in session.DomainScene().GetComponent<ServerInfoManagerComponent>().ServerInfo)
+            {
+                response.ServerInfoList.Add(serverInfo.ToMessage());
+            }
 
-            
-
+            reply();
             await ETTask.CompletedTask;
         }
     }

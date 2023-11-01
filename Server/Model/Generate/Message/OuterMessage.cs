@@ -554,7 +554,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(A2C_GetServerInfos))]
+	[ResponseType(nameof(A2C_GetServerInfo))]
 	[Message(OuterOpcode.C2A_GetServerInfo)]
 	[ProtoContract]
 	public partial class C2A_GetServerInfo: Object, IRequest

@@ -270,7 +270,7 @@ message ServerInfoProto
 	string ServerName = 3;
 }
 
-//ResponseType A2C_GetServerInfos
+//ResponseType A2C_GetServerInfo
 message C2A_GetServerInfo //IRequest
 {
 	int32 RpcId = 90;
