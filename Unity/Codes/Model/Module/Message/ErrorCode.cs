@@ -22,5 +22,9 @@ namespace ET
         public const int ERR_RequestRepeatedly = 200008;//多次请求服务器
         public const int ERR_GetServerInfo = 200009;//获取服务器列表
         public const int ERR_TokenError = 200010;//获取服务器Token
+        public const int ERR_CreateRole = 200011;//创建人物
+        public const int ERR_CreateRoleNameNull = 200013;//创建人物名字为空
+        public const int ERR_CreateRoleNameSame = 200014;//创建人物名字相同
+        public const int ERR_RequestSessionRepeatedly = 200016;//多次请求重复报错
     }
 }

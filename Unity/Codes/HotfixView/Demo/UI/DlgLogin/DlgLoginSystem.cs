@@ -36,7 +36,7 @@ namespace ET
                 }
                 //显示登录成功之后的逻辑
                 self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Login);
-                self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Lobby);
+                self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Test);
             }
             catch (Exception e)
             {

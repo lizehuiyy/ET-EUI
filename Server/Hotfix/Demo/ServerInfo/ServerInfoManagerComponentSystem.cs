@@ -36,7 +36,7 @@ namespace ET
         }
     }
     [FriendClassAttribute(typeof(ET.ServerInfoManagerComponent))]
-
+    [FriendClassAttribute(typeof(ET.ServerInfo))]
     public static class ServerInfoManagerComponentSystem
     {
         public static async ETTask Awake(this ServerInfoManagerComponent self)
@@ -45,7 +45,22 @@ namespace ET
 
             if (serverInfoList == null || serverInfoList.Count <= 0)
             {
-                Log.Error("server Info count = 0 ");
+                Log.Debug("server Info count = 0 ");
+                self.ServerInfo.Clear();
+                var serverInfoConfig = ServerInfoConfigCategory.Instance.GetAll();
+
+                foreach (var info in serverInfoConfig.Values)
+                {
+                    ServerInfo newServerInfo = self.AddChildWithId<ServerInfo>(info.Id);
+                    newServerInfo.ServerName = info.ServerName;
+                    newServerInfo.Status = (int)ServerStatus.Normal;
+                    self.ServerInfo.Add(newServerInfo);
+                    await DBManagerComponent.Instance.GetZoneDB(self.DomainZone()).Save(newServerInfo);
+
+
+                }
+
+
             }
             self.ServerInfo.Clear();
             foreach (var serverInfo in serverInfoList)

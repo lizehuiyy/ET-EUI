@@ -12,5 +12,9 @@ namespace ET
     {
         public List<ServerInfo> ServerInfoList = new List<ServerInfo>();
 
+        public int CurrentServerId = 0;
+
+
+
     }
 }

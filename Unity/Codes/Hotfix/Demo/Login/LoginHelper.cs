@@ -4,6 +4,8 @@ using System;
 namespace ET
 {
     [FriendClassAttribute(typeof(ET.AccountInfoComponent))]
+    [FriendClassAttribute(typeof(ET.ServerInfoComponent))]
+    [FriendClassAttribute(typeof(ET.RoleInfoComponent))]
     public static class LoginHelper
     {
         //public static async ETTask Login(Scene zoneScene, string address, string account, string password)
@@ -108,6 +110,46 @@ namespace ET
                 serverInfo.FromMessage(serverInfoProto);
                 zoneScene.GetComponent<ServerInfoComponent>().Add(serverInfo);
             }
+
+            await ETTask.CompletedTask;
+            return ErrorCode.ERR_Success;
+        }
+
+
+        public static async ETTask<int> CreateRole(Scene zoneScene, string name)
+        {
+            A2C_CreateRole a2C_CreateRole = null;
+
+            try
+            {
+                a2C_CreateRole = (A2C_CreateRole)await zoneScene.GetComponent<SessionComponent>().Session.Call(new C2A_CreateRole()
+                {
+                    AccountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId,
+                    Token = zoneScene.GetComponent<AccountInfoComponent>().Token,
+                    Name = name,
+                    ServerId = zoneScene.GetComponent<ServerInfoComponent>().CurrentServerId,
+
+                });
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.ToString());
+                return ErrorCode.ERR_CreateRole;
+            }
+
+            if (a2C_CreateRole.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error(a2C_CreateRole.Error.ToString());
+                return a2C_CreateRole.Error;
+            }
+
+
+            RoleInfo newRoleInfo = zoneScene.GetComponent<RoleInfoComponent>().AddChild<RoleInfo>();
+            newRoleInfo.FromMessage(a2C_CreateRole.RoleInfo);
+
+
+            zoneScene.GetComponent<RoleInfoComponent>().RoleInfos.Add(newRoleInfo);
+
 
             await ETTask.CompletedTask;
             return ErrorCode.ERR_Success;
