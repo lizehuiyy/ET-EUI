@@ -75,12 +75,50 @@ namespace ET
      		}
      	}
 
+		public ESCommonUI ESCommonUI
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_escommonui == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EGBackGround/ESCommonUI");
+		    	   this.m_escommonui = this.AddChild<ESCommonUI,Transform>(subTrans);
+     			}
+     			return this.m_escommonui;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopHorizontalScrollRect ELoopScrollList_LoopHorizontalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_ELoopScrollList_LoopHorizontalScrollRect == null )
+     			{
+		    		this.m_ELoopScrollList_LoopHorizontalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopHorizontalScrollRect>(this.uiTransform.gameObject,"EGBackGround/ELoopScrollList_");
+     			}
+     			return this.m_ELoopScrollList_LoopHorizontalScrollRect;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EGBackGroundRectTransform = null;
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
 			this.m_EText_TestText = null;
+			this.m_escommonui?.Dispose();
+			this.m_escommonui = null;
+			this.m_ELoopScrollList_LoopHorizontalScrollRect = null;
 			this.uiTransform = null;
 		}
 
@@ -88,6 +126,8 @@ namespace ET
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
 		private UnityEngine.UI.Text m_EText_TestText = null;
+		private ESCommonUI m_escommonui = null;
+		private UnityEngine.UI.LoopHorizontalScrollRect m_ELoopScrollList_LoopHorizontalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

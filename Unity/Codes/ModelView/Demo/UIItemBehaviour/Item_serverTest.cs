@@ -6,6 +6,7 @@ namespace ET
 	[EnableMethod]
 	public  class Scroll_Item_serverTest : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
 		{
@@ -71,6 +72,7 @@ namespace ET
 			this.m_EI_serverTestImage = null;
 			this.m_E_serverTestTipText = null;
 			this.uiTransform = null;
+			this.DataId = 0;
 		}
 
 		private UnityEngine.UI.Image m_EI_serverTestImage = null;

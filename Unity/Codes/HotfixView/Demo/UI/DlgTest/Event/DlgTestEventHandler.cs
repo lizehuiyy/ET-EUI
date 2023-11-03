@@ -29,7 +29,8 @@
 
 		public void OnHideWindow(UIBaseWindow uiBaseWindow)
 		{
-		}
+            uiBaseWindow.GetComponent<DlgTest>().HideWindow();
+        }
 
 		public void BeforeUnload(UIBaseWindow uiBaseWindow)
 		{
