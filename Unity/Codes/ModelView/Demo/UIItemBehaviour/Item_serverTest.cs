@@ -67,16 +67,68 @@ namespace ET
      		}
      	}
 
+		public UnityEngine.UI.Button EButton_SelectButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EButton_SelectButton == null )
+     				{
+		    			this.m_EButton_SelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EButton_Select");
+     				}
+     				return this.m_EButton_SelectButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EButton_Select");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image EButton_SelectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EButton_SelectImage == null )
+     				{
+		    			this.m_EButton_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EButton_Select");
+     				}
+     				return this.m_EButton_SelectImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EButton_Select");
+     			}
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EI_serverTestImage = null;
 			this.m_E_serverTestTipText = null;
+			this.m_EButton_SelectButton = null;
+			this.m_EButton_SelectImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
 
 		private UnityEngine.UI.Image m_EI_serverTestImage = null;
 		private UnityEngine.UI.Text m_E_serverTestTipText = null;
+		private UnityEngine.UI.Button m_EButton_SelectButton = null;
+		private UnityEngine.UI.Image m_EButton_SelectImage = null;
 		public Transform uiTransform = null;
 	}
 }

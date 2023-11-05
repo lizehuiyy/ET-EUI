@@ -155,5 +155,91 @@ namespace ET
             return ErrorCode.ERR_Success;
         }
 
+        public static async ETTask<int> GetRoles(Scene zoneScene)
+        {
+            A2C_GetRole a2C_GetRole = new A2C_GetRole();
+
+            try
+            {
+                a2C_GetRole = (A2C_GetRole)await zoneScene.GetComponent<SessionComponent>().Session.Call(new C2A_GetRole()
+                {
+                    AccountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId,
+                    Token = zoneScene.GetComponent<AccountInfoComponent>().Token,
+                    ServerId = zoneScene.GetComponent<ServerInfoComponent>().CurrentServerId,
+                });
+    
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.ToString());
+                return ErrorCode.ERR_GetRole;
+            }
+
+            if (a2C_GetRole.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error(a2C_GetRole.Error.ToString());
+                return a2C_GetRole.Error;
+            }
+
+            zoneScene.GetComponent<RoleInfoComponent>().RoleInfos.Clear();
+            foreach (var roleinfoProto in a2C_GetRole.RoleInfo)
+            {
+                RoleInfo newRoleInfo = zoneScene.GetComponent<RoleInfoComponent>().AddChild<RoleInfo>();
+                newRoleInfo.FromMessage(roleinfoProto);
+                Log.Debug("countcopu1111");
+                zoneScene.GetComponent<RoleInfoComponent>().RoleInfos.Add(newRoleInfo);
+            }
+
+           
+
+            return 0;
+        
+        }
+
+        public static async ETTask<int> DeleteRole(Scene zoneScene)
+        {
+            A2C_DeleteRole a2C_DeleteRole = null;
+
+
+            try
+            {
+                a2C_DeleteRole = (A2C_DeleteRole)await zoneScene.GetComponent<SessionComponent>().Session.Call(new C2A_DeleteRole()
+                {
+                    Token = zoneScene.GetComponent<AccountInfoComponent>().Token,
+                    AccountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId,
+                    RoleInfoId = zoneScene.GetComponent<RoleInfoComponent>().CurrentRoleId,
+                    ServerId = zoneScene.GetComponent<ServerInfoComponent>().CurrentServerId
+
+                }) ;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.ToString());
+                return ErrorCode.ERR_DeleteRole;
+            }
+            if (a2C_DeleteRole.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error(a2C_DeleteRole.Error.ToString());
+                return a2C_DeleteRole.Error;
+            }
+            int index = zoneScene.GetComponent<RoleInfoComponent>().RoleInfos.FindIndex((info) => { return info.Id == a2C_DeleteRole.DeleteRoleInfoId; });
+
+            zoneScene.GetComponent<RoleInfoComponent>().RoleInfos.RemoveAt(index);
+
+
+
+            await ETTask.CompletedTask;
+            return ErrorCode.ERR_Success;
+        }
+
+        public static async ETTask<int> GetRealmKey(Scene zoneScene)
+        {
+
+
+
+
+            await ETTask.CompletedTask;
+            return ErrorCode.ERR_Success;
+        }
     }
 }

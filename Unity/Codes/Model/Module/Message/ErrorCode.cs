@@ -25,6 +25,9 @@ namespace ET
         public const int ERR_CreateRole = 200011;//创建人物
         public const int ERR_CreateRoleNameNull = 200013;//创建人物名字为空
         public const int ERR_CreateRoleNameSame = 200014;//创建人物名字相同
-        public const int ERR_RequestSessionRepeatedly = 200016;//多次请求重复报错
+        public const int ERR_RequestSessionRepeatedly = 200015;//多次请求重复报错
+        public const int ERR_GetRole = 200016;//创建人物
+        public const int ERR_DeleteRole = 200017;//创建人物
+        public const int ERR_RoleNotExist = 200018;//人物不存在
     }
 }
