@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,19 +13,26 @@ namespace ET
         {
             long accountId = request.AccountId;
 
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.GateLoginLock,accountId.GetHashCode()))
+            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginGate,accountId.GetHashCode()))
             {
                 PlayerComponent playerComponent = scene.GetComponent<PlayerComponent>();
-                Player gateunit = playerComponent.Get(accountId);
-                if (gateunit == null)
+                Player player = playerComponent.Get(accountId);
+                if (player == null)
                 {
                     reply();
                     return;
 
                 }
                 playerComponent.Remove(accountId);
-                gateunit.Dispose();
-
+                Session gateSession = Game.EventSystem.Get(player.SessionInstanceId) as Session;
+                if (gateSession != null && !gateSession.IsDisposed)
+                {
+                    gateSession.Send(new A2C_Disconnect() { Error = ErrorCode.ERR_OtherAccountLogin });
+                    gateSession?.disconnect().Coroutine();
+                
+                }
+                player.SessionInstanceId = 0;
+                player.AddComponent<PlayerOfflineOutTimeComponent>();
             }
 
             reply();

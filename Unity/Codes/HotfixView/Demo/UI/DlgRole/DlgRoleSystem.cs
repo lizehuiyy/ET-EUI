@@ -72,9 +72,18 @@ namespace ET
                 int errorCode = await LoginHelper.GetRealmKey(self.ZoneScene());
                 if (errorCode != ErrorCode.ERR_Success)
                 {
-                    Log.Error("选择角色Error" +  errorCode.ToString());
+                    Log.Error("GetRealmKey Error" + errorCode.ToString());
                     return;
                 }
+
+                errorCode = await LoginHelper.EnterGame(self.ZoneScene());
+                if (errorCode != ErrorCode.ERR_Success)
+                {
+                    Log.Error("GetRealmKey Error" + errorCode.ToString());
+                    return;
+                }
+
+
             }
             catch (Exception e)
             {

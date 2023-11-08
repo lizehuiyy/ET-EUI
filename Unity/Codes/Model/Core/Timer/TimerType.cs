@@ -9,6 +9,8 @@
         public const int ActorMessageSenderChecker = 3;
 
         public const int AccountSessionCheckOutTime = 10;
+
+        public const int PlayerOfflineOutTime = 11;
         // 不能超过1000
     }
 }

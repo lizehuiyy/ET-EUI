@@ -24,6 +24,7 @@ namespace ET
                 response.Error = ErrorCode.ERR_RequestSessionRepeatedly;
                 reply();
                 session?.disconnect().Coroutine();
+                return;
             }
 
 
@@ -34,6 +35,7 @@ namespace ET
                 response.Error = ErrorCode.ERR_TokenError;
                 reply();
                 session?.disconnect().Coroutine();
+                return;
 
             }
 

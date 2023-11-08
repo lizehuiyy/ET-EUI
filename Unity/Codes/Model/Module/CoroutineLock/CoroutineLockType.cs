@@ -17,6 +17,8 @@ namespace ET
         public const int GateLoginLock = 22;
 
         public const int CreateRole = 23;
+        public const int LoginRealm = 24;
+        public const int LoginGate = 25;
 
 
         public const int Max = 100; // 这个必须最大

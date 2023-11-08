@@ -17,6 +17,7 @@ namespace ET
             {
                 Log.Error($"请求Scene错误，当前scene为：{session.DomainScene().SceneType}");
                 session.Dispose();
+                return;
             }
             session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
@@ -92,7 +93,8 @@ namespace ET
 
                     StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(),"LoginCenter");
                     long LoginCenterInstanceId = startSceneConfig.InstanceId;
-                    var loginAccountResponse = (L2A_LoginAccountResponse)await ActorMessageSenderComponent.Instance.Call(LoginCenterInstanceId,new A2L_loginAccountRequest() { AccountId = account.Id});
+                    var loginAccountResponse = (L2A_LoginAccountResponse)await ActorMessageSenderComponent.Instance.Call(LoginCenterInstanceId,
+                        new A2L_loginAccountRequest() { AccountId = account.Id});
 
 
 

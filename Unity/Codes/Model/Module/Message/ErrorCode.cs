@@ -29,5 +29,19 @@ namespace ET
         public const int ERR_GetRole = 200016;//创建人物
         public const int ERR_DeleteRole = 200017;//创建人物
         public const int ERR_RoleNotExist = 200018;//人物不存在
+        public const int ERR_GetRealmKey = 200019;//GetRealm
+        public const int ERR_RequestSceneTypeError = 200020;//A2R_GetRealmKey
+        public const int ERR_EnterRealm = 200021;//A2R_EnterRealm
+        public const int ERR_ConnectGateKeyError = 200022;//链接GATE 错误
+        public const int ERR_OtherAccountLogin = 200023;//其他玩家登录
+        public const int ERR_SessionPlayerError = 200024;//EnterGame session error
+        public const int ERR_NonePlayerError = 200025;//EnterGame 没有玩家
+        public const int ERR_PlayerSessionError = 200026;//EnterGame session error
+        public const int ERR_SessionError = 200027;//已经进入游戏逻辑服
+        public const int ERR_EnterGameError = 200028;//已经进入游戏逻辑服
+        public const int ERR_ReEnterGameError = 200029;//已经进入游戏逻辑服
+        public const int ERR_ReEnterGameError2 = 200030;//已经进入游戏逻辑服
+
+
     }
 }

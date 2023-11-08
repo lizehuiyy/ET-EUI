@@ -234,10 +234,120 @@ namespace ET
 
         public static async ETTask<int> GetRealmKey(Scene zoneScene)
         {
+            A2C_GetRealmKey a2C_GetRealmKey = null;
+
+            try
+            {
+                a2C_GetRealmKey = (A2C_GetRealmKey)await zoneScene.GetComponent<SessionComponent>().Session.Call(new C2A_GetRealmKey()
+                {
+                    Token = zoneScene.GetComponent<AccountInfoComponent>().Token,
+                    AccountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId,
+                    ServerId = zoneScene.GetComponent<ServerInfoComponent>().CurrentServerId
+                });
+            }
+            catch (Exception e)
+            {
+                Log.Error("A2C_GetRealmKey Error:" + e.ToString());
+                return ErrorCode.ERR_GetRealmKey;
+            }
+
+            if (a2C_GetRealmKey.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error("a2C_GetRealmKey error:" + a2C_GetRealmKey.Error.ToString());
+                return a2C_GetRealmKey.Error;
+            }
+
+            zoneScene.GetComponent<AccountInfoComponent>().RealmKey = a2C_GetRealmKey.RealmKey;
+            zoneScene.GetComponent<AccountInfoComponent>().RealmAddress = a2C_GetRealmKey.RealmAddress;
+            zoneScene.GetComponent<SessionComponent>().Session.Dispose();
 
 
+            await ETTask.CompletedTask;
+            return ErrorCode.ERR_Success;
+        }
+        public static async ETTask<int> EnterGame(Scene zoneScene)
+        {
+            string realmAddress = zoneScene.GetComponent<AccountInfoComponent>().RealmAddress;
 
 
+            //链接Realm 分配获取的Gate
+            R2C_LoginRealm r2C_LoginRealm;
+            Session session = zoneScene.GetComponent<NetKcpComponent>().Create(NetworkHelper.ToIPEndPoint(realmAddress));
+
+            try
+            {
+                r2C_LoginRealm = (R2C_LoginRealm)await session.Call(new C2R_LoginRealm()
+                {
+                    AccountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId,
+                    RealmTokenKey = zoneScene.GetComponent<AccountInfoComponent>().RealmKey
+                });
+            }
+            catch (Exception e)
+            {
+                Log.Error("链接Realm" + e.ToString());
+                session?.Dispose();
+                return ErrorCode.ERR_EnterRealm;
+            }
+
+            session?.Dispose();
+            if(r2C_LoginRealm.Error !=ErrorCode.ERR_Success)
+            {
+                Log.Error("r2C_LoginRealm error:" + r2C_LoginRealm.Error.ToString());
+                return r2C_LoginRealm.Error;
+            }
+
+
+            Session gateSession = zoneScene.GetComponent<NetKcpComponent>().Create(NetworkHelper.ToIPEndPoint(r2C_LoginRealm.GateAddress));
+            gateSession.AddComponent<PingComponent>();
+            zoneScene.GetComponent<SessionComponent>().Session = gateSession;
+
+            //开始连接Gate
+
+            long currentRoleId = zoneScene.GetComponent<RoleInfoComponent>().CurrentRoleId;
+            G2C_LoginGameGate g2C_LoginGameGate = null;
+
+
+            try
+            {
+                long accountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId;
+                g2C_LoginGameGate = (G2C_LoginGameGate)await gateSession.Call(new C2G_LoginGameGate() { Key = r2C_LoginRealm.GateSessionKey, AccountId = accountId, RoleId = currentRoleId });
+
+                Log.Debug("登录Gate成功");
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.ToString());
+                zoneScene.GetComponent<SessionComponent>().Session.Dispose();
+                return ErrorCode.ERR_NetWorkError;
+            }
+
+            if (g2C_LoginGameGate.Error != ErrorCode.ERR_Success)
+            {
+                zoneScene.GetComponent<SessionComponent>().Session.Dispose();
+                return g2C_LoginGameGate.Error;
+            }
+            //角色正式请求进入游戏逻辑服
+
+            G2C_EnterGame g2C_EnterGame = null;
+            try
+            {
+                g2C_EnterGame = (G2C_EnterGame)await gateSession.Call(new C2G_EnterGame() { });
+            }
+            catch (Exception e)
+            {
+                Log.Error("角色进入逻辑服失败" + e.ToString());
+                zoneScene.GetComponent<SessionComponent>().Session.Dispose();
+                return ErrorCode.ERR_NetWorkError;
+            }
+            if (g2C_EnterGame.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error(g2C_EnterGame.Error.ToString());
+                return g2C_EnterGame.Error;
+            }
+
+            Log.Debug("角色进入游戏成功");
             await ETTask.CompletedTask;
             return ErrorCode.ERR_Success;
         }
