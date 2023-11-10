@@ -55,6 +55,17 @@ namespace ET
 
                         case PlayerState.Game:
                             //通知游戏逻辑服下线 unit角色逻辑 并将数据存入数据库
+                            M2G_RequestExitGame m2G_RequestExitGame = (M2G_RequestExitGame)await MessageHelper.CallLocationActor(player.UnitId, new G2M_RequestExitGame() { });
+
+                            //通知移除账号角色登录信息
+                            long LoginCenterConfigSceneId = StartSceneConfigCategory.Instance.LoginCenterConfig.InstanceId;
+                            L2G_RemoveLoginRecord l2G_RemoveLoginRecord = (L2G_RemoveLoginRecord)await MessageHelper.CallActor(LoginCenterConfigSceneId,
+                                new G2L_RemoveLoginRecord()
+                                {
+                                    AccountId = player.Account,
+                                    ServerId = player.DomainZone()
+                                }) ;
+
 
                             break;
                     }

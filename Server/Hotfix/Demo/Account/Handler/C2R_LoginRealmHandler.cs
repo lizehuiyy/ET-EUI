@@ -10,9 +10,7 @@ namespace ET
     {
         protected override async ETTask Run(Session session, C2R_LoginRealm request, R2C_LoginRealm response, Action reply)
         {
-
-
-            Log.Debug("C2R_LoginRealmHandlerC2R_LoginRealmHandlerC2R_LoginRealmHandler");
+            
             if (session.DomainScene().SceneType != SceneType.Realm)
             {
                 Log.Error($"请求Scene错误，当前Scene：{session.DomainScene().SceneType}");

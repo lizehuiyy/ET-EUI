@@ -10,7 +10,9 @@
 		Location = 5,
 		Map = 6,
         Account = 7,
-        LoginCenter = 9,
+        LoginCenter = 8,
+		UnitCache = 9,//缓存服
+
 
         // 客户端Model层
         Client = 30,

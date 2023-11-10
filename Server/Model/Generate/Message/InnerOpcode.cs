@@ -35,5 +35,14 @@ namespace ET
 		 public const ushort L2G_AddLoginRecord = 20032;
 		 public const ushort G2M_RequestEnterGameState = 20033;
 		 public const ushort M2G_RequestEnterGameState = 20034;
+		 public const ushort G2M_RequestExitGame = 20035;
+		 public const ushort M2G_RequestExitGame = 20036;
+		 public const ushort G2L_RemoveLoginRecord = 20037;
+		 public const ushort L2G_RemoveLoginRecord = 20038;
+		 public const ushort Other2UnitCache_AddOrUpdateUnit = 20039;
+		 public const ushort UnitCache2Other_AddOrUpdateUnit = 20040;
+		 public const ushort Other2UnitCache_GetUnit = 20041;
+		 public const ushort Other2UnitCache_DeleteUnit = 20042;
+		 public const ushort UnitCache2Other_DeleteUnit = 20043;
 	}
 }
