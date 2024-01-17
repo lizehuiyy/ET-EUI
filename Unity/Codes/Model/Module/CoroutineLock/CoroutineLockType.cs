@@ -12,6 +12,14 @@ namespace ET
         public const int ResourcesLoader = 7;
         public const int LoadUIBaseWindows = 8;
 
+        public const int LoginAccount = 20;
+        public const int LoginCenterLock = 21;
+        public const int GateLoginLock = 22;
+
+        public const int CreateRole = 23;
+        public const int LoginRealm = 24;
+        public const int LoginGate = 25;
+
         public const int Max = 100; // 这个必须最大
     }
 }

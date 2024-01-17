@@ -1,0 +1,10 @@
+{"list":[
+{"_t":"PlayerNumericConfig","_id":10001,"Name":"碎片","BaseValue":0,"IsShow":1},
+{"_t":"PlayerNumericConfig","_id":10002,"Name":"宝石","BaseValue":0,"IsShow":1},
+{"_t":"PlayerNumericConfig","_id":10003,"Name":"等级","BaseValue":0,"IsShow":1},
+{"_t":"PlayerNumericConfig","_id":10004,"Name":"经验","BaseValue":0,"IsShow":1},
+{"_t":"PlayerNumericConfig","_id":10005,"Name":"胜场","BaseValue":0,"IsShow":1},
+{"_t":"PlayerNumericConfig","_id":10006,"Name":"负场","BaseValue":0,"IsShow":1},
+{"_t":"PlayerNumericConfig","_id":10007,"Name":"总场","BaseValue":0,"IsShow":1},
+{"_t":"PlayerNumericConfig","_id":10008,"Name":"天梯积分","BaseValue":0,"IsShow":1},
+]}

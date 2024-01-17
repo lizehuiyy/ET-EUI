@@ -7,15 +7,21 @@ namespace ET
     public partial class StartSceneConfigCategory
     {
         public MultiMap<int, StartSceneConfig> Gates = new MultiMap<int, StartSceneConfig>();
-        
+
+        public Dictionary<int, StartSceneConfig> Reamls = new Dictionary<int, StartSceneConfig>();
+
         public MultiMap<int, StartSceneConfig> ProcessScenes = new MultiMap<int, StartSceneConfig>();
         
         public Dictionary<long, Dictionary<string, StartSceneConfig>> ZoneScenesByName = new Dictionary<long, Dictionary<string, StartSceneConfig>>();
 
         public StartSceneConfig LocationConfig;
-        
+
+        public StartSceneConfig LoginCenterConfig;
+
         public List<StartSceneConfig> Robots = new List<StartSceneConfig>();
-        
+
+        public Dictionary<int, StartSceneConfig> UnitCaches = new Dictionary<int, StartSceneConfig>();
+
         public List<StartSceneConfig> GetByProcess(int process)
         {
             return this.ProcessScenes[process];
@@ -25,7 +31,14 @@ namespace ET
         {
             return this.ZoneScenesByName[zone][name];
         }
-        
+
+        public StartSceneConfig GetUnitCacheConfig(long unitId)
+        {
+            int zone = UnitIdStruct.GetUnitZone(unitId);
+            return UnitCaches[zone];
+
+        }
+
         public override void AfterEndInit()
         {
             foreach (StartSceneConfig startSceneConfig in this.GetAll().Values)
@@ -48,6 +61,15 @@ namespace ET
                         break;
                     case SceneType.Robot:
                         this.Robots.Add(startSceneConfig);
+                        break;
+                    case SceneType.Realm:
+                        this.Reamls.Add(startSceneConfig.Zone, startSceneConfig);
+                        break;
+                    case SceneType.LoginCenter:
+                        this.LoginCenterConfig = startSceneConfig;
+                        break;
+                    case SceneType.UnitCache:
+                        this.UnitCaches.Add(startSceneConfig.Zone, startSceneConfig);
                         break;
                 }
             }

@@ -3,7 +3,7 @@
 	// 这个可弄个配置表生成
     public static class NumericType
     {
-	    public const int Max = 10000;
+	    public const int Max = 100000;
 
 	    public const int Speed = 1000;
 	    public const int SpeedBase = Speed * 10 + 1;
@@ -28,5 +28,12 @@
 	    public const int AOIPct = AOI * 10 + 3;
 	    public const int AOIFinalAdd = AOI * 10 + 4;
 	    public const int AOIFinalPct = AOI * 10 + 5;
+
+        public const int Level = 10000;
+
+        public const int Gold = 10001;
+
+		public const int Exp = 10002;
+
     }
 }

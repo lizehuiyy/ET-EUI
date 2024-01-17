@@ -9,10 +9,21 @@ namespace ET
 		{
 			public override void Destroy(SessionPlayerComponent self)
 			{
-				// 发送断线消息
-				ActorLocationSenderComponent.Instance.Send(self.PlayerId, new G2M_SessionDisconnect());
-				self.Domain.GetComponent<PlayerComponent>()?.Remove(self.PlayerId);
-			}
+                // 发送断线消息
+                //ActorLocationSenderComponent.Instance.Send(self.PlayerId, new G2M_SessionDisconnect());
+                //self.Domain.GetComponent<PlayerComponent>()?.Remove(self.PlayerId);
+
+                if (!self.isLoginAgain && self.PlayerInstanceId != 0)
+                {
+
+                    Player player = Game.EventSystem.Get(self.PlayerInstanceId) as Player;
+                    DisconnectHelp.KickPlayer(player).Coroutine();
+                }
+                self.AccountId = 0;
+                self.PlayerId = 0;
+                self.PlayerInstanceId = 0;
+                self.isLoginAgain = false;
+            }
 		}
 
 		public static Player GetMyPlayer(this SessionPlayerComponent self)
