@@ -28,24 +28,4 @@ namespace ET
         //public int LoseMatch;   //账号负场
         //public int MMR;         //天梯积分
     }
-
-    public class AccountAwakeSystem : AwakeSystem<Account>
-    {
-        public override void Awake(Account self)
-        {
-            self.Coin = 100;
-            self.Gem = 0;
-            self.Level = 1;
-            self.Exp = 0;
-            self.WinMatch = 0;
-            self.LoseMatch = 0;
-            self.MMR = 0;
-
-
-
-
-        }
-    }
-
-
 }
