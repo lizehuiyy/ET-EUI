@@ -3,7 +3,7 @@
 	// 这个可弄个配置表生成
     public static class NumericType
     {
-	    public const int Max = 100000;
+	    public const int Max = 10000;
 
 	    public const int Speed = 1000;
 	    public const int SpeedBase = Speed * 10 + 1;
@@ -29,11 +29,13 @@
 	    public const int AOIFinalAdd = AOI * 10 + 4;
 	    public const int AOIFinalPct = AOI * 10 + 5;
 
-        public const int Level = 10000;
-
-        public const int Gold = 10001;
-
-		public const int Exp = 10002;
-
+        public const int Gold = 5001;//游戏获取金币
+        public const int Gem = 5002;//充值获取宝石
+        public const int Level = 5003;
+        public const int Exp = 5004;
+		public const int Wins = 5005;
+		public const int Lose = 5006;
+		public const int Total = 5007;
+		public const int MMR = 5008;//天梯积分
     }
 }

@@ -13,6 +13,7 @@ namespace ET
 		public static void RegisterUIEvent(this DlgGameMain self)
 		{
              self.View.EButton_TestButton.AddListenAsync(() => { return self.OnTestClickHandler(); });
+			 self.View.EButton_HeroButton.AddListenAsync(() => { return self.OnHeroClickHandler(); });
         }
 
 		public static void ShowWindow(this DlgGameMain self, Entity contextData = null)
@@ -36,8 +37,15 @@ namespace ET
 
             await ETTask.CompletedTask;
 		}
+		public static async ETTask OnHeroClickHandler(this DlgGameMain self)
+		{
+			Log.Debug("OnHeroClickHandler");
+            self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_GameMain);
+            self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HeroMain);
+            await ETTask.CompletedTask;
+        }
 
-		public static async ETTask OnTestClickHandler(this DlgGameMain self)
+        public static async ETTask OnTestClickHandler(this DlgGameMain self)
 		{
             try
             {

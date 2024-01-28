@@ -298,6 +298,7 @@ namespace ET
 
             Session gateSession = zoneScene.GetComponent<NetKcpComponent>().Create(NetworkHelper.ToIPEndPoint(r2C_LoginRealm.GateAddress));
             gateSession.AddComponent<PingComponent>();
+           
             zoneScene.GetComponent<SessionComponent>().Session = gateSession;
 
             //开始连接Gate
@@ -309,7 +310,12 @@ namespace ET
             try
             {
                 long accountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId;
-                g2C_LoginGameGate = (G2C_LoginGameGate)await gateSession.Call(new C2G_LoginGameGate() { Key = r2C_LoginRealm.GateSessionKey, AccountId = accountId, RoleId = currentRoleId });
+                g2C_LoginGameGate = (G2C_LoginGameGate)await gateSession.Call(new C2G_LoginGameGate() 
+                { 
+                    Key = r2C_LoginRealm.GateSessionKey, 
+                    AccountId = accountId, 
+                    RoleId = currentRoleId 
+                });
 
                 Log.Debug("登录Gate成功");
 
@@ -327,7 +333,14 @@ namespace ET
                 zoneScene.GetComponent<SessionComponent>().Session.Dispose();
                 return g2C_LoginGameGate.Error;
             }
+            await EnterGameMap(zoneScene);
+            return ErrorCode.ERR_Success;
+        }
+
+        public static async ETTask<int> EnterGameMap(Scene zoneScene)
+        {
             //角色正式请求进入游戏逻辑服
+            Session gateSession = zoneScene.GetComponent<SessionComponent>().Session;
 
             G2C_EnterGame g2C_EnterGame = null;
             try
@@ -355,8 +368,6 @@ namespace ET
             Log.Debug("角色进入场景成功");
             return ErrorCode.ERR_Success;
         }
-
-
 
 
     }

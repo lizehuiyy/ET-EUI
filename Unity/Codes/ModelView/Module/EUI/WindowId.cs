@@ -12,5 +12,7 @@ namespace ET
 		WindowID_GameMain,
 		WindowID_Role,
 		WindowID_Server,
+		WindowID_HeroMain,
+		WindowID_SingHero,
 	}
 }

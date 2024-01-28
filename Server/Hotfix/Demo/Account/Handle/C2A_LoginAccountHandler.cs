@@ -63,6 +63,7 @@ namespace ET
                     if (accountInfoList != null && accountInfoList.Count > 0)
                     {
                         account = accountInfoList[0];
+                        //Log.Debug("accountCoin" + account.Coin);
                         session.AddChild(account);
                         if (account.AccountType == (int)AccountType.BlackList)
                         {
@@ -92,6 +93,7 @@ namespace ET
                         await DBManagerComponent.Instance.GetZoneDB(session.DomainZone()).Save<Account>(account);
                     }
 
+                    
                     StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "LoginCenter");
                     long LoginCenterInstanceId = startSceneConfig.InstanceId;
                     var loginAccountResponse = (L2A_LoginAccountResponse)await ActorMessageSenderComponent.Instance.Call(LoginCenterInstanceId,

@@ -12,6 +12,7 @@ namespace ET
             zoneScene.AddComponent<PlayerComponent>();
             zoneScene.AddComponent<AccountInfoComponent>();
             zoneScene.AddComponent<ServerInfoComponent>();
+            zoneScene.AddComponent<HeroInfoComponent>();
             zoneScene.AddComponent<RoleInfoComponent>();
 
 

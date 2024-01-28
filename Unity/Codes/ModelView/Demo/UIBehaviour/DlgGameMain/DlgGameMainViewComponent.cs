@@ -143,6 +143,57 @@ namespace ET
      		}
      	}
 
+		public UnityEngine.UI.Button EButton_HeroButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_HeroButton == null )
+     			{
+		    		this.m_EButton_HeroButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EButton_Hero");
+     			}
+     			return this.m_EButton_HeroButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image EButton_HeroImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_HeroImage == null )
+     			{
+		    		this.m_EButton_HeroImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EButton_Hero");
+     			}
+     			return this.m_EButton_HeroImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text ELabel_HeroText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_ELabel_HeroText == null )
+     			{
+		    		this.m_ELabel_HeroText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EButton_Hero/ELabel_Hero");
+     			}
+     			return this.m_ELabel_HeroText;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EButton_startButton = null;
@@ -153,6 +204,9 @@ namespace ET
 			this.m_ELabel_TestText = null;
 			this.m_ELabel_LvText = null;
 			this.m_ELabel_CoinText = null;
+			this.m_EButton_HeroButton = null;
+			this.m_EButton_HeroImage = null;
+			this.m_ELabel_HeroText = null;
 			this.uiTransform = null;
 		}
 
@@ -164,6 +218,9 @@ namespace ET
 		private UnityEngine.UI.Text m_ELabel_TestText = null;
 		private UnityEngine.UI.Text m_ELabel_LvText = null;
 		private UnityEngine.UI.Text m_ELabel_CoinText = null;
+		private UnityEngine.UI.Button m_EButton_HeroButton = null;
+		private UnityEngine.UI.Image m_EButton_HeroImage = null;
+		private UnityEngine.UI.Text m_ELabel_HeroText = null;
 		public Transform uiTransform = null;
 	}
 }

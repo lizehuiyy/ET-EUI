@@ -12,11 +12,14 @@ namespace ET
 
 		public static void RegisterUIEvent(this DlgGameSky self)
 		{
-		 
+			
 		}
 
 		public static void ShowWindow(this DlgGameSky self, Entity contextData = null)
 		{
+
+
+
 		}
 
 		 
