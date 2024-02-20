@@ -297,6 +297,14 @@ message RoleInfoProto
 	int64 LastLoginTime = 5;
 	int64 CreateTime = 6;
 	int32 ServerId = 7;
+	int64 Coin = 8;       
+	int64 Gem = 9;        
+	int32 Level = 10;      
+	int32 Exp = 11;        
+	int32 WinMatch = 12;   
+	int32 LoseMatch = 13;  
+	int32 MMR = 14;        
+
 }
 
 //ResponseType A2C_CreateRole
@@ -469,4 +477,54 @@ message M2C_TestBtnAddCoin //IActorLocationResponse
 	int32 Error = 91;
 	string Message = 92;
 
+}
+
+
+//ResponseType Chat2C_SendChatInfo
+message C2Chat_SendChatInfo //IActorChatInfoRequest
+{
+	int32 RpcId = 1;
+	string ChatMessage = 2;
+}
+
+message Chat2C_SendChatInfo //IActorChatInfoResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message Chat2C_NoticeChatInfo //IActorMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	string Name = 1;
+	string ChatMessage = 2;
+
+}
+
+
+message RankInfoProto
+{
+	int64 ID = 1;
+	int64 UnitId = 2;
+	string Name = 3;
+	int32 MMR = 4;
+
+}
+
+//ResponseType Rank2C_GetRankInfo
+message C2Rank_GetRankInfo //IActorRankInfoRequest
+{
+	int32 RpcId = 1;
+}
+
+message Rank2C_GetRankInfo //IActorRankInfoResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated RankInfoProto RankInfoProtoList = 1;
 }

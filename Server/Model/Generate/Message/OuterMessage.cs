@@ -613,6 +613,27 @@ namespace ET
 		[ProtoMember(7)]
 		public int ServerId { get; set; }
 
+		[ProtoMember(8)]
+		public long Coin { get; set; }
+
+		[ProtoMember(9)]
+		public long Gem { get; set; }
+
+		[ProtoMember(10)]
+		public int Level { get; set; }
+
+		[ProtoMember(11)]
+		public int Exp { get; set; }
+
+		[ProtoMember(12)]
+		public int WinMatch { get; set; }
+
+		[ProtoMember(13)]
+		public int LoseMatch { get; set; }
+
+		[ProtoMember(14)]
+		public int MMR { get; set; }
+
 	}
 
 	[ResponseType(nameof(A2C_CreateRole))]
@@ -939,6 +960,101 @@ namespace ET
 
 		[ProtoMember(92)]
 		public string Message { get; set; }
+
+	}
+
+	[ResponseType(nameof(Chat2C_SendChatInfo))]
+	[Message(OuterOpcode.C2Chat_SendChatInfo)]
+	[ProtoContract]
+	public partial class C2Chat_SendChatInfo: Object, IActorChatInfoRequest
+	{
+		[ProtoMember(1)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(2)]
+		public string ChatMessage { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Chat2C_SendChatInfo)]
+	[ProtoContract]
+	public partial class Chat2C_SendChatInfo: Object, IActorChatInfoResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Chat2C_NoticeChatInfo)]
+	[ProtoContract]
+	public partial class Chat2C_NoticeChatInfo: Object, IActorMessage
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public string Name { get; set; }
+
+		[ProtoMember(2)]
+		public string ChatMessage { get; set; }
+
+	}
+
+	[Message(OuterOpcode.RankInfoProto)]
+	[ProtoContract]
+	public partial class RankInfoProto: Object
+	{
+		[ProtoMember(1)]
+		public long ID { get; set; }
+
+		[ProtoMember(2)]
+		public long UnitId { get; set; }
+
+		[ProtoMember(3)]
+		public string Name { get; set; }
+
+		[ProtoMember(4)]
+		public int MMR { get; set; }
+
+	}
+
+	[ResponseType(nameof(Rank2C_GetRankInfo))]
+	[Message(OuterOpcode.C2Rank_GetRankInfo)]
+	[ProtoContract]
+	public partial class C2Rank_GetRankInfo: Object, IActorRankInfoRequest
+	{
+		[ProtoMember(1)]
+		public int RpcId { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Rank2C_GetRankInfo)]
+	[ProtoContract]
+	public partial class Rank2C_GetRankInfo: Object, IActorRankInfoResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public List<RankInfoProto> RankInfoProtoList = new List<RankInfoProto>();
 
 	}
 

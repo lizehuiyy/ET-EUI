@@ -49,15 +49,64 @@ namespace ET
                     ActorLocationSenderComponent.Instance.Send(unitId, actorLocationMessage);
                     break;
                 }
+                case IActorRankInfoMessage actorRankInfoMessage:
+                {
+                    long rankInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "Rank").InstanceId;
+                    ActorMessageSenderComponent.Instance.Send(rankInstanceId, actorRankInfoMessage);
+                    break;
+                }
+                case IActorRankInfoRequest actorRankInfoRequest:
+                {
+                    long rankInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "Rank").InstanceId;
+                    int rpcid = actorRankInfoRequest.RpcId;
+                    long instanceId = session.InstanceId;
+                    IResponse response = await ActorMessageSenderComponent.Instance.Call(rankInstanceId, actorRankInfoRequest);
+                    response.RpcId = rpcid;
+
+                    if (session.InstanceId == instanceId)
+                    {
+                        session.Reply(response);
+                    }
+                    break;
+                }
+                case IActorChatInfoRequest actorChatInfoRequest:
+                {
+                    Player player = Game.EventSystem.Get(session.GetComponent<SessionPlayerComponent>().PlayerInstanceId) as Player;
+                    if (player == null || player.IsDisposed || player.ChatInfoInstanceId == 0)
+                    {
+                        break;
+                    }
+                    int RpcId = actorChatInfoRequest.RpcId;
+                    long instanceId = session.InstanceId;
+                    IResponse response = await ActorMessageSenderComponent.Instance.Call(player.ChatInfoInstanceId,actorChatInfoRequest);
+                    response.RpcId = RpcId;
+                    if (session.InstanceId == instanceId)
+                    {
+                        session.Reply(response);
+                    }
+
+                    break;
+                }
+                case IActorChatInfoMessage actorChatInfoRequest:
+                {
+                    Player player = Game.EventSystem.Get(session.GetComponent<SessionPlayerComponent>().PlayerInstanceId) as Player;
+                    if (player == null || player.IsDisposed || player.ChatInfoInstanceId == 0)
+                    {
+                        break;
+                    }
+
+                    ActorMessageSenderComponent.Instance.Send(player.ChatInfoInstanceId, actorChatInfoRequest);
+
+                    break;
+                }
                 case IActorRequest actorRequest:  // 分发IActorRequest消息，目前没有用到，需要的自己添加
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
                 case IActorMessage actorMessage:  // 分发IActorMessage消息，目前没有用到，需要的自己添加
-                {
-                    break;
-                }
-				
+                    {
+                        break;
+                    }
                 default:
                 {
                     // 非Actor消息

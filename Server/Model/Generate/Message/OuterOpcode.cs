@@ -58,5 +58,11 @@ namespace ET
 		 public const ushort M2C_TestUnitNumeric = 10055;
 		 public const ushort C2M_TestBtnAddCoin = 10056;
 		 public const ushort M2C_TestBtnAddCoin = 10057;
+		 public const ushort C2Chat_SendChatInfo = 10058;
+		 public const ushort Chat2C_SendChatInfo = 10059;
+		 public const ushort Chat2C_NoticeChatInfo = 10060;
+		 public const ushort RankInfoProto = 10061;
+		 public const ushort C2Rank_GetRankInfo = 10062;
+		 public const ushort Rank2C_GetRankInfo = 10063;
 	}
 }

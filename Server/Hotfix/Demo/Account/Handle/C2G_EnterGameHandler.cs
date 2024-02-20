@@ -9,6 +9,8 @@ namespace ET
     [FriendClassAttribute(typeof(ET.SessionPlayerComponent))]
     [FriendClassAttribute(typeof(ET.SessionStateComponent))]
     [FriendClassAttribute(typeof(ET.GateMapComponent))]
+    [FriendClassAttribute(typeof(ET.RoleInfo))]
+    [FriendClassAttribute(typeof(ET.UnitGateComponent))]
     public class C2G_EnterGameHandler : AMRpcHandler<C2G_EnterGame, G2C_EnterGame>
     {
         protected override async ETTask Run(Session session, C2G_EnterGame request, G2C_EnterGame response, Action reply)
@@ -106,6 +108,7 @@ namespace ET
                         (bool isNewPlayer, Unit unit) = await UnitHelper.LoadUnit(player);
                         unit.AddComponent<UnitGateComponent, long>(player.InstanceId);
 
+                        player.ChatInfoInstanceId = await this.EnterWorldChatServer(unit);//登录聊天服
 
                         await UnitHelper.InitUnit(unit, isNewPlayer);
 
@@ -141,6 +144,22 @@ namespace ET
 
 
             }
+        }
+
+
+        private async ETTask<long> EnterWorldChatServer(Unit unit)
+        {
+
+            Log.Debug(" + unit.GetComponent<RoleInfo>().Name" + unit.GetComponent<RoleInfo>().Name);
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), "ChatInfo");
+            Chat2G_EnterChat chat2G_EnterChat = (Chat2G_EnterChat)await MessageHelper.CallActor(startSceneConfig.InstanceId, new G2Chat_EnterChat()
+            {
+                UnitId = unit.Id,
+                Name = unit.GetComponent<RoleInfo>().Name,
+                GateSessionActorId = unit.GetComponent<UnitGateComponent>().GateSessionActorId,
+            });
+
+            return chat2G_EnterChat.ChatInfoUnitInstanceId;
         }
     }
 }

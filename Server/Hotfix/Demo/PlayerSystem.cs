@@ -15,17 +15,18 @@
         }
 
 
-        //[ObjectSystem]
-        //public class PlayerDestroySystem : DestroySystem<Player>
-        //{
-        //    public override void Destroy(Player self)
-        //    {
-        //        self.Account = 0;
-        //        self.UnitId = 0;
-        //        //self.ChatInfoInstanceId = 0;
-        //        self.PlayerState = PlayerState.Disconnect;
-        //        self.ClientSession?.Dispose();
-        //    }
-        //}
+        [ObjectSystem]
+        public class PlayerDestroySystem : DestroySystem<Player>
+        {
+            public override void Destroy(Player self)
+            {
+                self.Account = 0;
+                self.UnitId = 0;
+                self.ChatInfoInstanceId = 0;
+                self.PlayerState = PlayerState.Disconnect;
+                self.ClientSession?.Dispose();
+                
+            }
+        }
     }
 }

@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ET
+﻿namespace ET
 {
-    [ChildType]
+    public enum RoleInfoState
+    {
+        Normal = 0,
+        Freeze,
+    }
+
+    [ComponentOf]
+
+#if SERVER
+    public class RoleInfo : Entity,IAwake,ITransfer,IUnitCache
+#else
     public class RoleInfo : Entity, IAwake
+#endif
     {
         public string Name;
 
@@ -20,7 +25,5 @@ namespace ET
         public long LastLoginTime;
 
         public long CreateTime;
-
-
     }
 }

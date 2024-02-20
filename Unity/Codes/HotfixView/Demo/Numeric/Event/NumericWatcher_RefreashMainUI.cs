@@ -11,6 +11,7 @@ namespace ET
     [NumericWatcher(NumericType.Level)]
     [NumericWatcher(NumericType.Gold)]
     [NumericWatcher(NumericType.Exp)]
+    [NumericWatcher(NumericType.MMR)]
 
     public class NumericWatcher_RefreashMainUI : INumericWatcher
     {

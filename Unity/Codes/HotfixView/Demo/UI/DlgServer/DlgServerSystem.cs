@@ -43,7 +43,7 @@ namespace ET
         {
             Scroll_Item_serverTest serverTest = self.ScrollItemServerTestDic[index].BindTrans(transform);
             ServerInfo info = self.ZoneScene().GetComponent<ServerInfoComponent>().ServerInfoList[index];
-            serverTest.EI_serverTestImage.color = info.Id == self.ZoneScene().GetComponent<ServerInfoComponent>().CurrentServerId ? Color.red : Color.cyan;
+            serverTest.EI_serverTestImage.color = info.Id == self.ZoneScene().GetComponent<ServerInfoComponent>().CurrentServerId ? Color.red : new Color(0f, 1f, 1f, 1f);
             serverTest.E_serverTestTipText.SetText(info.ServerName);
             serverTest.EButton_SelectButton.AddListener(() => self.OnSelectServerItemHandler(info.Id));
 

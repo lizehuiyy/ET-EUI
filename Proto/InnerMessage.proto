@@ -237,6 +237,9 @@ message L2G_AddLoginRecord //IActorResponse
 message G2M_RequestEnterGameState //IActorLocationRequest
 {
 	int32 RpcId = 90;
+	int64 UserID = 1;
+	int64 GActorID = 2;
+	int64 CActorID = 3;
 	
 }
 
@@ -248,6 +251,14 @@ message M2G_RequestEnterGameState //IActorLocationResponse
 	
 	
 }
+
+//ResponseType M2G_RequestExitGame
+message G2M_EnterGameSucess //IActorLocationRequest
+{
+	int32 RpcId = 90;
+	int64 GameId = 1;
+}
+
 
 //ResponseType M2G_RequestExitGame
 message G2M_RequestExitGame //IActorLocationRequest
@@ -319,5 +330,41 @@ message UnitCache2Other_DeleteUnit //IActorResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+
+//ResponseType Chat2G_EnterChat
+message G2Chat_EnterChat //IActorRequest
+{
+	int32 RpcId = 90;
+	string Name = 1;
+	int64 UnitId = 2;
+	int64 GateSessionActorId = 3;
+}
+
+
+message Chat2G_EnterChat //IActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 ChatInfoUnitInstanceId = 1;
+
+}
+
+//ResponseType Chat2G_RequestExitChat
+message G2Chat_RequestExitChat //IActorRequest
+{
+	int32 RpcId = 90;
+}
+
+message Chat2G_RequestExitChat //IActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+
 
 

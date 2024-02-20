@@ -8,6 +8,8 @@
         public const int SessionAcceptTimeout = 1003;
 
         public const int SaveChangeDBData = 1004;
+
+        public const int RankUI = 1005;
         // 不能超过10000
     }
 }

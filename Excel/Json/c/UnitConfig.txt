@@ -1,5 +1,5 @@
 {"list":[
-{"_t":"UnitConfig","_id":1001,"Type":1,"Name":"notail","Desc":"回合开始，乙方场上单位回血1点，OG5人组单位回血2点","Position":5,"attack":3,"life":7},
+{"_t":"UnitConfig","_id":1001,"Type":1,"Name":"Notail","Desc":"回合开始，乙方场上单位回血1点，OG5人组单位回血2点","Position":5,"attack":3,"life":7},
 {"_t":"UnitConfig","_id":1002,"Type":1,"Name":"Ana","Desc":"上帝降临，毁灭除OG5人组外所有单位","Position":1,"attack":8,"life":8},
 {"_t":"UnitConfig","_id":1003,"Type":1,"Name":"Ceb","Desc":"齐心协力，友方攻击防御+1，OG5人组加2","Position":3,"attack":2,"life":8},
 {"_t":"UnitConfig","_id":1004,"Type":1,"Name":"Ceb","Desc":"齐心协力，友方攻击防御+1，OG5人组加2","Position":3,"attack":2,"life":8},
@@ -12,7 +12,7 @@
 {"_t":"UnitConfig","_id":1011,"Type":1,"Name":"YYF","Desc":"石佛，嘲讽，受到伤害-1，当我方单位小于敌方则-2,","Position":3,"attack":4,"life":12},
 {"_t":"UnitConfig","_id":1012,"Type":1,"Name":"Zhou","Desc":"对敌方防御塔造成伤害+1，绝境翻盘，当我方防御塔血量总数小于敌方，则我方单位对敌方防御塔造成伤害+2","Position":1,"attack":10,"life":5},
 {"_t":"UnitConfig","_id":1013,"Type":1,"Name":"430","Desc":"高歌猛进，若我方单位大于敌方，则攻击力翻倍","Position":2,"attack":9,"life":7},
-{"_t":"UnitConfig","_id":1014,"Type":1,"Name":"BurNing","Desc":"雷达","Position":1,"attack":6,"life":10},
+{"_t":"UnitConfig","_id":1014,"Type":1,"Name":"BurNing","Desc":"雷达，fram时获取闪避","Position":1,"attack":6,"life":10},
 {"_t":"UnitConfig","_id":1015,"Type":1,"Name":"Paparazi","Desc":"仙人模式","Position":2,"attack":5,"life":5},
 {"_t":"UnitConfig","_id":1016,"Type":1,"Name":"Kaka","Desc":"满瓶增益，死亡后减益","Position":4,"attack":3,"life":7},
 {"_t":"UnitConfig","_id":1017,"Type":1,"Name":"Fata","Desc":"减buff，死亡后增益","Position":5,"attack":2,"life":2},

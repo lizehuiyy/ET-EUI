@@ -16,7 +16,13 @@ namespace ET
 
 
     }
-    public class RoleInfo : Entity, IAwake
+
+    [ComponentOf]
+#if SERVER
+    public class RoleInfo : Entity, IAwake, ITransfer, IUnitCache
+#else
+      public class RoleInfo : Entity,IAwake
+#endif
     {
         public string Name;
 

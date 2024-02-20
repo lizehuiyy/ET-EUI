@@ -44,5 +44,6 @@ namespace ET
         public const int ERR_TestUpdateNumeric = 200031;//
         public const int ERR_TestBtnAddCoin = 200032;//
         public const int ERR_CoinNumNotExist = 200033;//
+        public const int ERR_ChatMessageEmpty = 200034;//发送聊天内容为空
     }
 }

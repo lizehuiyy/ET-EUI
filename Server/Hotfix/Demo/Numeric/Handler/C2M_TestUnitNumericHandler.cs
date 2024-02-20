@@ -17,10 +17,13 @@ namespace ET
             int newGold = numericComponent.GetAsInt(NumericType.Gold) + 100;
             int newExp = numericComponent.GetAsInt(NumericType.Exp) + 50;
             int newLevel = numericComponent.GetAsInt(NumericType.Level) + 1;
-            Log.Debug("newGold"+ newGold+ "newExp"+ newExp+ "newLevel"+ newLevel);
+            int newMMR = numericComponent.GetAsInt(NumericType.MMR) + 1;
+            Log.Debug("newGold"+ newGold+ "newExp"+ newExp+ "newLevel"+ newLevel + "newMMR" + newMMR);
             numericComponent.Set(NumericType.Gold, newGold);
             numericComponent.Set(NumericType.Exp, newExp);
             numericComponent.Set(NumericType.Level, newLevel);
+            numericComponent.Set(NumericType.MMR, newMMR);
+            RankHelper.AddOrUpdateLevelRank(unit);
             //set 数值改变 setnoevent
 
 

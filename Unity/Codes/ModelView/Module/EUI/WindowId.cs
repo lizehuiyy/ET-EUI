@@ -14,5 +14,7 @@ namespace ET
 		WindowID_Server,
 		WindowID_HeroMain,
 		WindowID_SingHero,
+		WindowID_Chat,
+		WindowID_Rank,
 	}
 }

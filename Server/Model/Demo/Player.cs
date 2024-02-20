@@ -19,7 +19,7 @@
         }
     }
 
-    public sealed class Player : Entity, IAwake<string>, IAwake<long, long>
+    public sealed class Player : Entity, IAwake<string>, IAwake<long, long>,IDestroy
     {
         public long Account { get; set; }
 
@@ -29,6 +29,8 @@
         public long UnitId { get; set; }
 
         public PlayerState PlayerState { get; set; }
+
+        public long ChatInfoInstanceId { get; set; }
 
 
     }

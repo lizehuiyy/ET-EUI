@@ -45,7 +45,7 @@ namespace ET
             Scroll_Item_role scroll_Item_Role = self.ScrollItemRoles[index].BindTrans(transform);
             RoleInfo info = self.ZoneScene().GetComponent<RoleInfoComponent>().RoleInfos[index];
 
-            scroll_Item_Role.EI_RoleImageImage.color = info.Id == self.ZoneScene().GetComponent<RoleInfoComponent>().CurrentRoleId ? Color.green : Color.gray;
+            scroll_Item_Role.EI_RoleImageImage.color = info.Id == self.ZoneScene().GetComponent<RoleInfoComponent>().CurrentRoleId ? Color.green : new Color(0f, 1f, 1f, 1f);
             scroll_Item_Role.E_serverTestTipText.SetText(info.Name);
             scroll_Item_Role.EButton_SelectButton.AddListener(() => { self.OnRoleItemClickHandler(info.Id); });
 
