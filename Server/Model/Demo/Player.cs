@@ -4,6 +4,7 @@
     {
         Disconnect,
         Gate,
+        Map,
         Game,
 
     }

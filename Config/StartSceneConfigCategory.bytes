@@ -8,8 +8,9 @@
 "Account*Account0•N
  "LoginCenter*LoginCenter
 	"	UnitCache*	UnitCache
-
-"Map*Game
+
+"Map*Map
 "Rank*Rank
 "ChatInfo*ChatInfo
+"Game*Game
 È"Robot*Robot01

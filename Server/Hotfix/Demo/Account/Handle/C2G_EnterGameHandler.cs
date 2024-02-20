@@ -63,7 +63,7 @@ namespace ET
                         return;
                     }
 
-                    if (player.PlayerState == PlayerState.Game)
+                    if (player.PlayerState == PlayerState.Map)
                     {
                         try
                         {
@@ -115,7 +115,7 @@ namespace ET
                         response.MyId = unit.Id;
                         reply();
 
-                        StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "Game");
+                        StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "Map");
                         await TransferHelper.Transfer(unit, startSceneConfig.InstanceId, startSceneConfig.Name);
 
 
@@ -125,8 +125,8 @@ namespace ET
                         {
                             sessionStateComponent = session.AddComponent<SessionStateComponent>();
                         }
-                        sessionStateComponent.State = SessionState.Game;
-                        player.PlayerState = PlayerState.Game;
+                        sessionStateComponent.State = SessionState.Map;
+                        player.PlayerState = PlayerState.Map;
 
                     }
                     catch (Exception e)

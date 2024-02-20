@@ -9,6 +9,7 @@ namespace ET
     public enum SessionState
     {
         Normal,
+        Map,
         Game,
 
     }
