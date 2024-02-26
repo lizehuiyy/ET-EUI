@@ -32,6 +32,7 @@
         public PlayerState PlayerState { get; set; }
 
         public long ChatInfoInstanceId { get; set; }
+        public long MatchInstanceId { get; set; }
 
 
     }

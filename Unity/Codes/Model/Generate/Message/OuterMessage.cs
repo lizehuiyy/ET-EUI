@@ -1058,4 +1058,80 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Match2C_StartMatch))]
+	[Message(OuterOpcode.C2Match_StartMatch)]
+	[ProtoContract]
+	public partial class C2Match_StartMatch: Object, IActorMatchRequest
+	{
+		[ProtoMember(1)]
+		public int RpcId { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Match2C_StartMatch)]
+	[ProtoContract]
+	public partial class Match2C_StartMatch: Object, IActorMatchResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
+	[Message(OuterOpcode.MatchProto)]
+	[ProtoContract]
+	public partial class MatchProto: Object
+	{
+		[ProtoMember(1)]
+		public long ID { get; set; }
+
+		[ProtoMember(2)]
+		public long UnitId { get; set; }
+
+		[ProtoMember(3)]
+		public string Name { get; set; }
+
+		[ProtoMember(4)]
+		public int MMR { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Match2C_StartMatchSuccess)]
+	[ProtoContract]
+	public partial class Match2C_StartMatchSuccess: Object, IActorMessage
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public long UnitId1 { get; set; }
+
+		[ProtoMember(2)]
+		public string Name1 { get; set; }
+
+		[ProtoMember(3)]
+		public int MMR1 { get; set; }
+
+		[ProtoMember(4)]
+		public long UnitId2 { get; set; }
+
+		[ProtoMember(5)]
+		public string Name2 { get; set; }
+
+		[ProtoMember(6)]
+		public int MMR2 { get; set; }
+
+	}
+
 }

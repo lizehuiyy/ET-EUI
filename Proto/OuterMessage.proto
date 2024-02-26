@@ -528,3 +528,39 @@ message Rank2C_GetRankInfo //IActorRankInfoResponse
 	string Message = 92;
 	repeated RankInfoProto RankInfoProtoList = 1;
 }
+
+//ResponseType Match2C_StartMatch
+message C2Match_StartMatch //IActorMatchRequest
+{
+	int32 RpcId = 1;
+}
+
+message Match2C_StartMatch //IActorMatchResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message MatchProto
+{
+	int64 ID = 1;
+	int64 UnitId = 2;
+	string Name = 3;
+	int32 MMR = 4;
+}
+
+message Match2C_StartMatchSuccess //IActorMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int64 UnitId1 = 1;
+	string Name1 = 2;
+	int32 MMR1 = 3;
+	int64 UnitId2 = 4;
+	string Name2 = 5;
+	int32 MMR2 = 6;
+	
+}

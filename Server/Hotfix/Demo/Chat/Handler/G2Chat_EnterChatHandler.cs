@@ -30,7 +30,7 @@ namespace ET
 
             chatInfoUnit.Name = request.Name;
             chatInfoUnit.GateSessionActorId = request.GateSessionActorId;
-            response.ChatInfoUnitInstanceId = chatInfoUnit.InstanceId;                                                                                                              
+            response.ChatInfoUnitInstanceId = chatInfoUnit.InstanceId;
             chatInfoUnitComponent.Add(chatInfoUnit);
 
             reply();

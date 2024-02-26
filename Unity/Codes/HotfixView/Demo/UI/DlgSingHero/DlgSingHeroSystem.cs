@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Reflection;
+using UnityEngine.EventSystems;
 
 namespace ET
 {
@@ -15,8 +16,8 @@ namespace ET
 
         public static void RegisterUIEvent(this DlgSingHero self)
         {
-
-        }
+            self.View.EButton_backgroudButton.onClick.AddListener(()=>self.OnCloseHandler());
+        } 
 
         public static void ShowWindow(this DlgSingHero self, Entity contextData = null)
         {
@@ -26,6 +27,16 @@ namespace ET
 
 
         }
+
+        public static void OnCloseHandler(this DlgSingHero self)
+        {
+            self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SingHero);
+            self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HeroMain);
+
+        }
+
+
+
         public static void Refresh(this DlgSingHero self)
         {
             int HeroId = self.ZoneScene().GetComponent<HeroInfoComponent>().SelectHero;

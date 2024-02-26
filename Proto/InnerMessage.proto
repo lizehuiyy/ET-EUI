@@ -365,6 +365,36 @@ message Chat2G_RequestExitChat //IActorResponse
 }
 
 
+//ResponseType Match2G_EnterMatch
+message G2Match_EnterMatch //IActorRequest
+{
+	int32 RpcId = 90;
+	string Name = 1;
+	int64 UnitId = 2;
+	int64 GateSessionActorId = 3;
+	int32 MMR = 4;
+}
 
 
+message Match2G_EnterMatch //IActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 MatchInfoUnitInstanceId = 1;
+
+}
+
+//ResponseType Match2G_RequestExitMatch
+message G2Match_RequestExitMatch //IActorRequest
+{
+	int32 RpcId = 90;
+}
+
+message Match2G_RequestExitMatch //IActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
 

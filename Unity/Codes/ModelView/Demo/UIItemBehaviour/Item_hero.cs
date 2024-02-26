@@ -91,54 +91,6 @@ namespace ET
      		}
      	}
 
-		public UnityEngine.UI.Button EButton_SelectButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_EButton_SelectButton == null )
-     				{
-		    			this.m_EButton_SelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
-     				}
-     				return this.m_EButton_SelectButton;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
-     			}
-     		}
-     	}
-
-		public UnityEngine.UI.Image EButton_SelectImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_EButton_SelectImage == null )
-     				{
-		    			this.m_EButton_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
-     				}
-     				return this.m_EButton_SelectImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
-     			}
-     		}
-     	}
-
 		public UnityEngine.UI.Text ELabel_attackText
      	{
      		get
@@ -211,16 +163,164 @@ namespace ET
      		}
      	}
 
+		public UnityEngine.UI.Button EButton_SelectButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EButton_SelectButton == null )
+     				{
+		    			this.m_EButton_SelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
+     				}
+     				return this.m_EButton_SelectButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image EButton_SelectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EButton_SelectImage == null )
+     				{
+		    			this.m_EButton_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
+     				}
+     				return this.m_EButton_SelectImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
+     			}
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger EButton_SelectEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EButton_SelectEventTrigger == null )
+     				{
+		    			this.m_EButton_SelectEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
+     				}
+     				return this.m_EButton_SelectEventTrigger;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"ContectRect/EButton_Select");
+     			}
+     		}
+     	}
+
+		public UnityEngine.Canvas ERect_IconCanvas
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_ERect_IconCanvas == null )
+     				{
+		    			this.m_ERect_IconCanvas = UIFindHelper.FindDeepChild<UnityEngine.Canvas>(this.uiTransform.gameObject,"ContectRect/ERect_Icon");
+     				}
+     				return this.m_ERect_IconCanvas;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.Canvas>(this.uiTransform.gameObject,"ContectRect/ERect_Icon");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Text ELabel_Name1Text
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_ELabel_Name1Text == null )
+     				{
+		    			this.m_ELabel_Name1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"ContectRect/ERect_Icon/ELabel_Name1");
+     				}
+     				return this.m_ELabel_Name1Text;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"ContectRect/ERect_Icon/ELabel_Name1");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Text ELabel_IdText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_ELabel_IdText == null )
+     				{
+		    			this.m_ELabel_IdText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"ContectRect/ELabel_Id");
+     				}
+     				return this.m_ELabel_IdText;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"ContectRect/ELabel_Id");
+     			}
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_ELabel_NameText = null;
 			this.m_ELabel_ContentText = null;
 			this.m_EImage_IconImage = null;
-			this.m_EButton_SelectButton = null;
-			this.m_EButton_SelectImage = null;
 			this.m_ELabel_attackText = null;
 			this.m_ELabel_posText = null;
 			this.m_ELabel_lifeText = null;
+			this.m_EButton_SelectButton = null;
+			this.m_EButton_SelectImage = null;
+			this.m_EButton_SelectEventTrigger = null;
+			this.m_ERect_IconCanvas = null;
+			this.m_ELabel_Name1Text = null;
+			this.m_ELabel_IdText = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -228,11 +328,15 @@ namespace ET
 		private UnityEngine.UI.Text m_ELabel_NameText = null;
 		private UnityEngine.UI.Text m_ELabel_ContentText = null;
 		private UnityEngine.UI.Image m_EImage_IconImage = null;
-		private UnityEngine.UI.Button m_EButton_SelectButton = null;
-		private UnityEngine.UI.Image m_EButton_SelectImage = null;
 		private UnityEngine.UI.Text m_ELabel_attackText = null;
 		private UnityEngine.UI.Text m_ELabel_posText = null;
 		private UnityEngine.UI.Text m_ELabel_lifeText = null;
+		private UnityEngine.UI.Button m_EButton_SelectButton = null;
+		private UnityEngine.UI.Image m_EButton_SelectImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_EButton_SelectEventTrigger = null;
+		private UnityEngine.Canvas m_ERect_IconCanvas = null;
+		private UnityEngine.UI.Text m_ELabel_Name1Text = null;
+		private UnityEngine.UI.Text m_ELabel_IdText = null;
 		public Transform uiTransform = null;
 	}
 }

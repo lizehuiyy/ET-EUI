@@ -4,6 +4,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using CommandLine;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using System.Diagnostics.Tracing;
+using ILRuntime.Runtime;
+
 
 namespace ET
 {
@@ -18,6 +23,10 @@ namespace ET
             {
                 self.OnSrcollItemRefreshHandler(transform, index);
             });
+
+
+
+
         }
 
         public static void ShowWindow(this DlgHeroMain self, Entity contextData = null)
@@ -41,24 +50,146 @@ namespace ET
                
                 ItemHero.ELabel_ContentText.SetText(config.Desc);
                 ItemHero.ELabel_NameText.SetText(config.Name);
+                ItemHero.ELabel_Name1Text.SetText(config.Name);
                 ItemHero.ELabel_attackText.SetText(config.attack.ToString());
                 ItemHero.ELabel_lifeText.SetText(config.life.ToString());
                 ItemHero.ELabel_posText.SetText(config.Position.ToString());
-               
+                ItemHero.ELabel_IdText.SetText("" + (index + 1001));
+
+
             }
             ItemHero.EButton_SelectButton.AddListener(() => self.OnSelectServerItemHandler(index + 1001));
-
+            
             Log.Debug(self.ZoneScene().GetComponent<HeroInfoComponent>().SelectHero + "SelectHero");
 
 
+
+            //ItemHero.EButton_SelectImage.AddListener(EventTriggerType.Drag, OnDrag);
+            ////ItemHero.EButton_SelectImage.AddListener(EventTriggerType.EndDrag, OnEndDrag);
+            //ItemHero.EButton_SelectImage.AddListener(EventTriggerType.BeginDrag, OnBeginDrag);
+            //EventTrigger.(ItemHero.EButton_SelectImage.gameObject).onBeginDrag.AddListener(onBeginDrag);
+            EventListener.Get(ItemHero.EButton_SelectImage.gameObject).onBeginDrag = OnBeginDrag;
+            EventListener.Get(ItemHero.EButton_SelectImage.gameObject).onDrag = OnDrag;
+            EventListener.Get(ItemHero.EButton_SelectImage.gameObject).onEndDrag = OnEndDrag;
         }
+
+        /// <summary>
+        /// 为组件添加监听事件
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="eventTriggerType"></param>
+        /// <param name="callback"></param>
+        /// <returns></returns>
+        public static void AddListener(this Component obj, EventTriggerType eventTriggerType, UnityAction<BaseEventData> callback)
+        {
+            //添加EventTrigger组件
+            EventTrigger trigger = obj.GetComponent<EventTrigger>();
+            if (trigger == null)
+            {
+                trigger = obj.gameObject.AddComponent<EventTrigger>();
+            }
+
+            //获取事件列表
+            List<EventTrigger.Entry> entries = trigger.triggers;
+            if (entries == null)
+            {
+                entries = new List<EventTrigger.Entry>();
+            }
+            //获取对应事件
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            bool isExist = false;
+            for (int i = 0; i < entries.Count; i++)
+            {
+                if (entries[i].eventID == eventTriggerType)
+                {
+                    entry = entries[i];
+                    isExist = true;
+                }
+            }
+            entry.callback.AddListener(callback);
+            if (!isExist)
+            {
+                trigger.triggers.Clear();
+                trigger.triggers.Add(entry);
+            }
+        }
+        public static void OnBeginDrag(GameObject go, BaseEventData eventData)
+        {
+            
+            DlgHeroMain.DragCardId = go.transform.parent.Find("ELabel_Id").GetComponent<Text>().text.ToInt32();
+
+
+            RectTransform ERect_Icon = go.transform.parent.Find("ERect_Icon").GetComponent<RectTransform>();
+            ERect_Icon.SetVisible(true);
+            Log.Debug(DlgHeroMain.DragCardId + "OnBeginDrag" + eventData.ToString());
+        }
+
+        public static void OnDrag(GameObject go, BaseEventData eventData)
+        {
+            Debug.Log("OnDrag:" + go.name);
+
+            if (go.GetComponent<RectTransform>())
+            {
+                Vector3 v3;
+                PointerEventData data = eventData as PointerEventData;
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(go.GetComponent<RectTransform>(),
+                    data.position, data.enterEventCamera, out v3);
+
+                RectTransform ERect_Icon = go.transform.parent.Find("ERect_Icon").GetComponent<RectTransform>();
+                
+                ERect_Icon.position = v3;
+            }
+            else
+            {
+                if (SetCameraRayPoint(out Vector3 pos, go))
+                {
+                    go.transform.position = pos;
+                }
+            }
+        }
+
+        public static void OnEndDrag(GameObject go, BaseEventData eventData)
+        {
+
+
+
+            RectTransform ERect_Icon = go.transform.parent.Find("ERect_Icon").GetComponent<RectTransform>();
+            ERect_Icon.SetVisible(false);
+            ERect_Icon.position = Vector3.zero;
+            Log.Debug("OnEndDrag"+ DlgHeroMain.DragCardId);
+        }
+        public static bool SetCameraRayPoint(out Vector3 pos, GameObject go)
+        {
+            pos = Vector3.zero;
+
+            if (Camera.main == null)
+                return false;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            float dist = 1000;
+
+            if (Physics.Raycast(ray, out hit, dist))
+            {
+                if (go == hit.transform.gameObject)
+                    return false;
+
+                pos = hit.point;
+                return true;
+            }
+
+            return false;
+        }
+
+
         public static void OnSelectServerItemHandler(this DlgHeroMain self, int HeroId)
         {
             //self.ZoneScene().GetComponent<ServerInfoComponent>().CurrentServerId = int.Parse(serverId.ToString());
             //Log.Debug($"当前选择的服务器Id 是：{serverId}");
             //self.View.ELoopScrollList_ServerLoopVerticalScrollRect.RefillCells();
             self.ZoneScene().GetComponent<HeroInfoComponent>().SelectHero = HeroId;
-            self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HeroMain);
+            //self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HeroMain);
             self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_SingHero);
         }
 

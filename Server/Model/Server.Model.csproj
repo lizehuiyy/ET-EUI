@@ -111,6 +111,10 @@
       <Link>Module\Message\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\..\Unity\Assets\Mono\Core\EventListener.cs" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ThirdParty\ETTask\ETTask.csproj" />
     <ProjectReference Include="..\..\ThirdParty\ShareLib\ShareLib.csproj" />

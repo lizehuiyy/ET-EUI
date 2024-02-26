@@ -64,5 +64,9 @@ namespace ET
 		 public const ushort RankInfoProto = 10061;
 		 public const ushort C2Rank_GetRankInfo = 10062;
 		 public const ushort Rank2C_GetRankInfo = 10063;
+		 public const ushort C2Match_StartMatch = 10064;
+		 public const ushort Match2C_StartMatch = 10065;
+		 public const ushort MatchProto = 10066;
+		 public const ushort Match2C_StartMatchSuccess = 10067;
 	}
 }

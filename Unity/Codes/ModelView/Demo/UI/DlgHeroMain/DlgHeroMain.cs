@@ -10,5 +10,7 @@ namespace ET
 
         public Dictionary<int, Scroll_Item_hero> ScrollItemHeroDic;
 
+		public static int DragCardId = 0;
+
     }
 }

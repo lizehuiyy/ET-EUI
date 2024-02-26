@@ -721,4 +721,69 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Match2G_EnterMatch))]
+	[Message(InnerOpcode.G2Match_EnterMatch)]
+	[ProtoContract]
+	public partial class G2Match_EnterMatch: Object, IActorRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string Name { get; set; }
+
+		[ProtoMember(2)]
+		public long UnitId { get; set; }
+
+		[ProtoMember(3)]
+		public long GateSessionActorId { get; set; }
+
+		[ProtoMember(4)]
+		public int MMR { get; set; }
+
+	}
+
+	[Message(InnerOpcode.Match2G_EnterMatch)]
+	[ProtoContract]
+	public partial class Match2G_EnterMatch: Object, IActorResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public long MatchInfoUnitInstanceId { get; set; }
+
+	}
+
+	[ResponseType(nameof(Match2G_RequestExitMatch))]
+	[Message(InnerOpcode.G2Match_RequestExitMatch)]
+	[ProtoContract]
+	public partial class G2Match_RequestExitMatch: Object, IActorRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+	}
+
+	[Message(InnerOpcode.Match2G_RequestExitMatch)]
+	[ProtoContract]
+	public partial class Match2G_RequestExitMatch: Object, IActorResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
 }

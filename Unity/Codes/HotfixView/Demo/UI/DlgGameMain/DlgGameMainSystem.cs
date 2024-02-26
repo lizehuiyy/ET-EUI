@@ -16,6 +16,8 @@ namespace ET
              self.View.EButton_HeroButton.AddListenAsync(() => { return self.OnHeroClickHandler(); });
              self.View.EButton_ChatButton.AddListenAsync(() => { return self.OnChatClickHandler(); });
              self.View.EButton_RankButton.AddListenAsync(() => { return self.OnRankClickHandler(); });
+             self.View.EButton_startButton.AddListenAsync(() => { return self.OnStartClickHandler(); });
+             self.View.EButton_StopButton.AddListenAsync(() => { return self.OnStopClickHandler(); });
         }
 
 		public static void ShowWindow(this DlgGameMain self, Entity contextData = null)
@@ -58,6 +60,53 @@ namespace ET
             self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Rank);
             await ETTask.CompletedTask;
         }
+        public static async ETTask OnStartClickHandler(this DlgGameMain self)
+        {
+            Log.Debug("OnStartClickHandler");
+
+
+            try
+            {
+                int error = await MatchHelper.StartMatch(self.ZoneScene());
+                if (error != ErrorCode.ERR_Success)
+                {
+                    return;
+                }
+                self.View.EButton_startButton.SetVisible(false);
+                self.View.EButton_StopButton.SetVisible(true);
+                Log.Debug("开始匹配");
+            }
+            catch (Exception e)
+            {
+                Log.Debug(e.ToString());
+            }
+
+            await ETTask.CompletedTask;
+        }
+        public static async ETTask OnStopClickHandler(this DlgGameMain self)
+        {
+            Log.Debug("OnStartClickHandler");
+
+
+            try
+            {
+                int error = await MatchHelper.StopMatch(self.ZoneScene());
+                if (error != ErrorCode.ERR_Success)
+                {
+                    return;
+                }
+                self.View.EButton_startButton.SetVisible(true);
+                self.View.EButton_StopButton.SetVisible(false);
+                Log.Debug("取消匹配");
+            }
+            catch (Exception e)
+            {
+                Log.Debug(e.ToString());
+            }
+
+            await ETTask.CompletedTask;
+        }
+        
 
         public static async ETTask OnTestClickHandler(this DlgGameMain self)
 		{

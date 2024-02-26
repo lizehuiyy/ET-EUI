@@ -120,8 +120,10 @@
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="..\..\Server\Model\Module\Actor\IActorChatInfoMessage.cs" />
+      <Compile Remove="..\..\Server\Model\Module\Actor\IActorMatchMessage.cs" />
       <Compile Remove="..\..\Server\Model\Module\Actor\IActorRankInfoMessage.cs" />
       <Compile Remove="..\..\Unity\Codes\Model\Module\Actor\IActorChatInfoMessage.cs" />
+      <Compile Remove="..\..\Unity\Codes\Model\Module\Actor\IActorMatchMessage.cs" />
       <Compile Remove="..\..\Unity\Codes\Model\Module\Actor\IActorRankInfoMessage.cs" />
     </ItemGroup>
     <ItemGroup>

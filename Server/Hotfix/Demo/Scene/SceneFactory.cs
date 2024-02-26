@@ -56,6 +56,9 @@ namespace ET
                 case SceneType.ChatInfo:
                     scene.AddComponent<ChatInfoUnitComponent>();
                     break;
+                case SceneType.Match:
+                    scene.AddComponent<LandMatchComponent>();
+                    break;
             }
 
             return scene;

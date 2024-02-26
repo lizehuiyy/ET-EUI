@@ -16,6 +16,7 @@ namespace ET
             zoneScene.AddComponent<RoleInfoComponent>();
             zoneScene.AddComponent<RankComponent>();
             zoneScene.AddComponent<ChatComponent>();
+            zoneScene.AddComponent<Room>();
 
 
             Game.EventSystem.Publish(new EventType.AfterCreateZoneScene() {ZoneScene = zoneScene});

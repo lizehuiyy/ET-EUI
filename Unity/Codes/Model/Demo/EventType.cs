@@ -113,5 +113,10 @@ namespace ET
         {
             public Scene zoneScene;
         }
+
+        public struct UpdateRoom
+        {
+            public Scene zoneScene;
+        }
     }
 }

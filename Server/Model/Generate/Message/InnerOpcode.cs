@@ -49,5 +49,9 @@ namespace ET
 		 public const ushort Chat2G_EnterChat = 20046;
 		 public const ushort G2Chat_RequestExitChat = 20047;
 		 public const ushort Chat2G_RequestExitChat = 20048;
+		 public const ushort G2Match_EnterMatch = 20049;
+		 public const ushort Match2G_EnterMatch = 20050;
+		 public const ushort G2Match_RequestExitMatch = 20051;
+		 public const ushort Match2G_RequestExitMatch = 20052;
 	}
 }
