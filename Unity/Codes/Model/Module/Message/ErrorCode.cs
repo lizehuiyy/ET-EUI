@@ -45,5 +45,10 @@ namespace ET
         public const int ERR_TestBtnAddCoin = 200032;//
         public const int ERR_CoinNumNotExist = 200033;//
         public const int ERR_ChatMessageEmpty = 200034;//发送聊天内容为空
+        public const int ERR_SaveHeroCard = 200035;//保存卡组失败
+        public const int ERR_StartMatch = 200036;//寻找比赛
+        public const int ERR_StopMatch = 200037;//停止寻找比赛
+        public const int ERR_EndMatch = 200038;//回合结束
+        public const int ERR_GGMatch = 200039;//投降
     }
 }

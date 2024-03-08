@@ -433,6 +433,7 @@ message G2C_EnterGame //IResponse
 	string Message = 3;
 	
 	int64 MyId = 4;
+	repeated int32 HeroCardList = 5; 
 
 }
 
@@ -533,6 +534,8 @@ message Rank2C_GetRankInfo //IActorRankInfoResponse
 message C2Match_StartMatch //IActorMatchRequest
 {
 	int32 RpcId = 1;
+	repeated int32 HeroCardList = 2;
+
 }
 
 message Match2C_StartMatch //IActorMatchResponse
@@ -562,5 +565,64 @@ message Match2C_StartMatchSuccess //IActorMessage
 	int64 UnitId2 = 4;
 	string Name2 = 5;
 	int32 MMR2 = 6;
-	
+	repeated int32 HeroCardList = 7;
+
+}
+
+
+//ResponseType G2C_SaveCard
+message C2G_SaveCard //IRequest
+{
+	int32 RpcId = 1;
+	repeated int32 HeroCardList = 2;
+}
+
+message G2C_SaveCard //IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+
+}
+message UseCardProto
+{
+	int32 CardId = 1;
+	int32 CardPos = 1;
+}
+
+message StageCardProto
+{
+	int32 CardId = 1;
+	int32 CardPos = 2;
+	int32 Fram = 3;
+	int32 UseSkill = 4;
+}
+
+//ResponseType Match2C_EndRoundMatch
+message C2Match_EndRoundMatch //IActorMatchRequest
+{
+	int32 RpcId = 1;
+	repeated UseCardProto Units = 2;
+	repeated StageCardProto Units = 3;
+}
+
+message Match2C_EndRoundMatch //IActorMatchResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType Match2C_GGMatch
+message C2Match_GGMatch //IActorMatchRequest
+{
+	int32 RpcId = 1;
+	int64 AccountId = 2;
+}
+
+message Match2C_GGMatch //IActorMatchResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }

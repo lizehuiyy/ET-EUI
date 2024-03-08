@@ -60,6 +60,8 @@ namespace ET
                             //通知聊天服下线Unit
                             Chat2G_RequestExitChat chat2G_RequestExitChat = (Chat2G_RequestExitChat)await MessageHelper.CallActor(player.ChatInfoInstanceId, new G2Chat_RequestExitChat());
 
+                            //通知比赛服下线Unit
+                            Match2G_RequestExitMatch match2G_RequestExitMatch = (Match2G_RequestExitMatch)await MessageHelper.CallActor(player.MatchInstanceId, new G2Match_RequestExitMatch());
 
                             //通知移除账号角色登录信息
                             long LoginCenterConfigSceneId = StartSceneConfigCategory.Instance.LoginCenterConfig.InstanceId;

@@ -6,41 +6,42 @@ using UnityEngine.UI;
 
 namespace ET
 {
-	[FriendClass(typeof(DlgGameMain))]
-	public static  class DlgGameMainSystem
-	{
+    [FriendClass(typeof(DlgGameMain))]
+    [FriendClassAttribute(typeof(ET.HeroInfoComponent))]
+    public static class DlgGameMainSystem
+    {
 
-		public static void RegisterUIEvent(this DlgGameMain self)
-		{
-             self.View.EButton_TestButton.AddListenAsync(() => { return self.OnTestClickHandler(); });
-             self.View.EButton_HeroButton.AddListenAsync(() => { return self.OnHeroClickHandler(); });
-             self.View.EButton_ChatButton.AddListenAsync(() => { return self.OnChatClickHandler(); });
-             self.View.EButton_RankButton.AddListenAsync(() => { return self.OnRankClickHandler(); });
-             self.View.EButton_startButton.AddListenAsync(() => { return self.OnStartClickHandler(); });
-             self.View.EButton_StopButton.AddListenAsync(() => { return self.OnStopClickHandler(); });
+        public static void RegisterUIEvent(this DlgGameMain self)
+        {
+            self.View.EButton_TestButton.AddListenAsync(() => { return self.OnTestClickHandler(); });
+            self.View.EButton_HeroButton.AddListenAsync(() => { return self.OnHeroClickHandler(); });
+            self.View.EButton_ChatButton.AddListenAsync(() => { return self.OnChatClickHandler(); });
+            self.View.EButton_RankButton.AddListenAsync(() => { return self.OnRankClickHandler(); });
+            self.View.EButton_startButton.AddListenAsync(() => { return self.OnStartClickHandler(); });
+            self.View.EButton_StopButton.AddListenAsync(() => { return self.OnStopClickHandler(); });
         }
 
-		public static void ShowWindow(this DlgGameMain self, Entity contextData = null)
-		{
+        public static void ShowWindow(this DlgGameMain self, Entity contextData = null)
+        {
 
 
-			self.Refresh().Coroutine();
-		}
+            self.Refresh().Coroutine();
+        }
 
-		 
-		public static async ETTask Refresh(this DlgGameMain self)
-		{
 
-			
-			Unit unit = UnitHelper.GetMyUnitFromCurrentScene(self.ZoneScene().CurrentScene());
-			NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            Log.Debug(numericComponent.GetAsInt((int)NumericType.Level)+ "RefreshRefreshRefresh"+ numericComponent.GetAsInt((int)NumericType.Gold) + "MMR:" + numericComponent.GetAsInt((int)NumericType.MMR));
+        public static async ETTask Refresh(this DlgGameMain self)
+        {
+
+
+            Unit unit = UnitHelper.GetMyUnitFromCurrentScene(self.ZoneScene().CurrentScene());
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            Log.Debug(numericComponent.GetAsInt((int)NumericType.Level) + "RefreshRefreshRefresh" + numericComponent.GetAsInt((int)NumericType.Gold) + "MMR:" + numericComponent.GetAsInt((int)NumericType.MMR));
             self.View.ELabel_LvText.SetText($"LV:{numericComponent.GetAsInt((int)NumericType.Level)}");
-			self.View.ELabel_CoinText.SetText($"Coin:{numericComponent.GetAsInt((int)NumericType.Gold)}");
+            self.View.ELabel_CoinText.SetText($"Coin:{numericComponent.GetAsInt((int)NumericType.Gold)}");
             self.View.ELabel_MMRText.SetText($"MMR:{numericComponent.GetAsInt((int)NumericType.MMR)}");
 
             await ETTask.CompletedTask;
-		}
+        }
         public static async ETTask OnHeroClickHandler(this DlgGameMain self)
         {
             Log.Debug("OnHeroClickHandler");
@@ -63,7 +64,14 @@ namespace ET
         public static async ETTask OnStartClickHandler(this DlgGameMain self)
         {
             Log.Debug("OnStartClickHandler");
+            if (self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum.Count!= 30)
+            {
 
+                self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Tips);
+                self.DomainScene().GetComponent<UIComponent>().GetDlgLogic<DlgTips>()?.ShowText("Please complete the card deck");
+
+                return;
+            }
 
             try
             {
@@ -106,18 +114,18 @@ namespace ET
 
             await ETTask.CompletedTask;
         }
-        
+
 
         public static async ETTask OnTestClickHandler(this DlgGameMain self)
-		{
+        {
             try
             {
-				int error = await NumericHelp.TestUpdateNumeric(self.ZoneScene());
-				if (error != ErrorCode.ERR_Success)
-				{
-					return;
-				}
-				Log.Debug("发送更新属性消息成功");
+                int error = await NumericHelp.TestUpdateNumeric(self.ZoneScene());
+                if (error != ErrorCode.ERR_Success)
+                {
+                    return;
+                }
+                Log.Debug("发送更新属性消息成功");
             }
             catch (Exception e)
             {
@@ -125,6 +133,6 @@ namespace ET
             }
 
             await ETTask.CompletedTask;
-		}
+        }
     }
 }

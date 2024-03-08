@@ -8,6 +8,7 @@ namespace ET
 {
     [FriendClassAttribute(typeof(ET.LandMatchComponent))]
     [FriendClassAttribute(typeof(ET.Room))]
+    [FriendClassAttribute(typeof(ET.DeckComponent))]
     public static class LandMatchComponentSystem
     {
         public static void AddLandMatch(this LandMatchComponent self, Gamer gamer)
@@ -37,6 +38,43 @@ namespace ET
             }
 
         }
+        public static void RemoveGamingMatch(this LandMatchComponent self, long id)
+        {
+            if (self.GamingLandlordsRooms.TryGetValue(id, out Room room))
+            {
+                self.GamingLandlordsRooms.Remove(id);
+                room?.Dispose();
+            }
+
+        }
+        public static void RemoveFreeLandMatch(this LandMatchComponent self, long id)
+        {
+            if (self.FreeLandlordsRooms.TryGetValue(id, out Room room))
+            {
+                self.FreeLandlordsRooms.Remove(id);
+                room?.Dispose();
+            }
+
+        }
+        public static void RemoveWaitingMatch(this LandMatchComponent self, long id)
+        {
+            if (self.Waiting.TryGetValue(id, out Room room))
+            {
+                self.Waiting.Remove(id);
+                room?.Dispose();
+            }
+
+        }
+        public static void RemovePlayingMatch(this LandMatchComponent self, long id)
+        {
+            if (self.Playing.TryGetValue(id, out Room room))
+            {
+                self.Playing.Remove(id);
+                room?.Dispose();
+            }
+
+        }
+
 
 
 
@@ -47,6 +85,20 @@ namespace ET
             return room;
 
         }
+
+        public static Room GetPlayingRoom(this LandMatchComponent self, long UserId)
+        {
+            self.Playing.TryGetValue(UserId, out Room room);
+            return room;
+
+        }
+        public static Room GetGamingLandRoom(this LandMatchComponent self, long RoomId)
+        {
+            self.GamingLandlordsRooms.TryGetValue(RoomId, out Room room);
+            return room;
+
+        }
+
 
 
 
@@ -145,9 +197,10 @@ namespace ET
             //匹配成功  房间内玩家数量=2
             if (room.Count == 2)
             {
+                room.GameStart();
+
                 foreach (var roomGamer in room.gamers)
                 {
-
                     MessageHelper.SendActor(roomGamer.GateSessionActorId, new Match2C_StartMatchSuccess()
                     {
                         UnitId1 = room.gamers[0].UserID,
@@ -156,6 +209,9 @@ namespace ET
                         UnitId2 = room.gamers[1].UserID,
                         Name2 = room.gamers[1].Name,
                         MMR2 = room.gamers[1].MMR,
+                        HeroCardList = roomGamer.GetComponent<DeckComponent>().HardDeck,
+                        
+
                     });
                 }
             }

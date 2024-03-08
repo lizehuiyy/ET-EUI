@@ -17,5 +17,6 @@ namespace ET
 		WindowID_Chat,
 		WindowID_Rank,
 		WindowID_Room,
+		WindowID_Tips,
 	}
 }

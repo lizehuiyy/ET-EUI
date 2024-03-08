@@ -87,9 +87,9 @@ namespace ET
                 unit.AddComponent(roleInfos[0]);
 
                 UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
-
+                
             }
-
+            
 
             return (isNewUnit, unit);
 

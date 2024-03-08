@@ -893,6 +893,9 @@ namespace ET
 		[ProtoMember(4)]
 		public long MyId { get; set; }
 
+		[ProtoMember(5)]
+		public List<int> HeroCardList = new List<int>();
+
 	}
 
 	[Message(OuterOpcode.M2C_NoticeUnitNumeric)]
@@ -1066,6 +1069,9 @@ namespace ET
 		[ProtoMember(1)]
 		public int RpcId { get; set; }
 
+		[ProtoMember(2)]
+		public List<int> HeroCardList = new List<int>();
+
 	}
 
 	[Message(OuterOpcode.Match2C_StartMatch)]
@@ -1131,6 +1137,90 @@ namespace ET
 
 		[ProtoMember(6)]
 		public int MMR2 { get; set; }
+
+		[ProtoMember(7)]
+		public List<int> HeroCardList = new List<int>();
+
+	}
+
+	[ResponseType(nameof(G2C_SaveCard))]
+	[Message(OuterOpcode.C2G_SaveCard)]
+	[ProtoContract]
+	public partial class C2G_SaveCard: Object, IRequest
+	{
+		[ProtoMember(1)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(2)]
+		public List<int> HeroCardList = new List<int>();
+
+	}
+
+	[Message(OuterOpcode.G2C_SaveCard)]
+	[ProtoContract]
+	public partial class G2C_SaveCard: Object, IResponse
+	{
+		[ProtoMember(1)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(2)]
+		public int Error { get; set; }
+
+		[ProtoMember(3)]
+		public string Message { get; set; }
+
+	}
+
+	[ResponseType(nameof(Match2C_EndRoundMatch))]
+	[Message(OuterOpcode.C2Match_EndRoundMatch)]
+	[ProtoContract]
+	public partial class C2Match_EndRoundMatch: Object, IActorMatchRequest
+	{
+		[ProtoMember(1)]
+		public int RpcId { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Match2C_EndRoundMatch)]
+	[ProtoContract]
+	public partial class Match2C_EndRoundMatch: Object, IActorMatchResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
+	[ResponseType(nameof(Match2C_GGMatch))]
+	[Message(OuterOpcode.C2Match_GGMatch)]
+	[ProtoContract]
+	public partial class C2Match_GGMatch: Object, IActorMatchRequest
+	{
+		[ProtoMember(1)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(2)]
+		public long AccountId { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Match2C_GGMatch)]
+	[ProtoContract]
+	public partial class Match2C_GGMatch: Object, IActorMatchResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
 
 	}
 

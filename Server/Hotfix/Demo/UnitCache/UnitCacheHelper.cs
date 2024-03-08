@@ -49,6 +49,32 @@ namespace ET
             }
             return unit;
         }
+        public static async ETTask<Unit> GetUnitCache(long unitId)
+        {
+            long instanceId = StartSceneConfigCategory.Instance.GetUnitCacheConfig(unitId).InstanceId;
+            Other2UnitCache_GetUnit message = new Other2UnitCache_GetUnit() { UnitId = unitId };
+            UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await MessageHelper.CallActor(instanceId, message);
+            if (queryUnit.Error != ErrorCode.ERR_Success || queryUnit.EntityList.Count <= 0)
+            {
+                return null;
+            }
+
+            int indexOf = queryUnit.ComponentNameList.IndexOf(nameof(Unit));
+            Unit unit = queryUnit.EntityList[indexOf] as Unit;
+            if (unit == null)
+            {
+                return null;
+            }
+            foreach (Entity entity in queryUnit.EntityList)
+            {
+                if (entity == null || entity is Unit)
+                {
+                    continue;
+                }
+                unit.AddComponent(entity);
+            }
+            return unit;
+        }
 
         //获取玩家组件缓存
         public static async ETTask<T> GetUnitComponentCache<T>(long unitId) where T : Entity, IUnitCache

@@ -11,6 +11,8 @@ namespace ET
         
         public static EventSystem EventSystem => EventSystem.Instance;
 
+        public static Scene zoneScene;
+
         private static Scene scene;
         public static Scene Scene
         {

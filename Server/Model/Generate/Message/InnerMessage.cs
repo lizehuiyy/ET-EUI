@@ -741,6 +741,9 @@ namespace ET
 		[ProtoMember(4)]
 		public int MMR { get; set; }
 
+		[ProtoMember(5)]
+		public long PlayerInstanceId { get; set; }
+
 	}
 
 	[Message(InnerOpcode.Match2G_EnterMatch)]
@@ -783,6 +786,46 @@ namespace ET
 
 		[ProtoMember(92)]
 		public string Message { get; set; }
+
+	}
+
+	[ResponseType(nameof(G2Match_GGMatch))]
+	[Message(InnerOpcode.Match2G_GGMatch)]
+	[ProtoContract]
+	public partial class Match2G_GGMatch: Object, IActorRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public long UnitId { get; set; }
+
+		[ProtoMember(2)]
+		public int Win { get; set; }
+
+		[ProtoMember(3)]
+		public long PlayerInstanceId { get; set; }
+
+	}
+
+	[Message(InnerOpcode.G2Match_GGMatch)]
+	[ProtoContract]
+	public partial class G2Match_GGMatch: Object, IActorResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public long UnitId { get; set; }
+
+		[ProtoMember(2)]
+		public int Win { get; set; }
 
 	}
 

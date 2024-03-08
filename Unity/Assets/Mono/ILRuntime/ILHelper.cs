@@ -6,6 +6,7 @@ using ILRuntime.Runtime.Intepreter;
 using ProtoBuf;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace ET
 {
@@ -60,7 +61,8 @@ namespace ET
             appdomain.DelegateManager.RegisterMethodDelegate<AsyncOperation>();
             appdomain.DelegateManager.RegisterMethodDelegate<System.Type, ILRuntime.Runtime.Intepreter.ILTypeInstance>();
             appdomain.DelegateManager.RegisterMethodDelegate<System.Int64, ILRuntime.Runtime.Intepreter.ILTypeInstance>();
-            
+
+
             appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Events.UnityAction>();
             appdomain.DelegateManager.RegisterFunctionDelegate<System.Object, ET.ETTask>();
             appdomain.DelegateManager.RegisterFunctionDelegate<ILTypeInstance, bool>();
@@ -79,6 +81,32 @@ namespace ET
             appdomain.DelegateManager.RegisterFunctionDelegate<System.Int64, System.Collections.Generic.List<ILRuntime.Runtime.Intepreter.ILTypeInstance>, System.Boolean>();
 
             appdomain.DelegateManager.RegisterMethodDelegate<ET.AService>();
+
+            appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.EventSystems.BaseEventData>();
+            appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<UnityEngine.EventSystems.BaseEventData>>((act) =>
+            {
+                return new UnityEngine.Events.UnityAction<UnityEngine.EventSystems.BaseEventData>((arg0) =>
+                {
+                    ((Action<UnityEngine.EventSystems.BaseEventData>)act)(arg0);
+                });
+            });
+            appdomain.DelegateManager.RegisterMethodDelegate<GameObject>();
+            appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<GameObject, BaseEventData>>((act) =>
+            {
+                return new UnityEngine.Events.UnityAction<GameObject, BaseEventData>((obj,arg0) =>
+                {
+                    ((Action<GameObject, BaseEventData>)act)(obj,arg0);
+                });
+            });
+            appdomain.DelegateManager.RegisterDelegateConvertor<DG.Tweening.TweenCallback>((act) =>
+            {
+                return new DG.Tweening.TweenCallback(() =>
+                {
+                    ((Action)act)();
+                });
+            });
+
+
 
             appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((act) =>
             {

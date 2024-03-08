@@ -17,7 +17,13 @@ namespace ET
                 Log.Error("NumericChangeEvent_NoticeClientError");
                 return;
             }
-            unit.GetComponent<NumericNoticeComponent>()?.NoticeImmdiately(args);
+            if (unit.GetComponent<NumericNoticeComponent>() != null)
+                unit.GetComponent<NumericNoticeComponent>()?.NoticeImmdiately(args);
+            else
+            {
+                unit.AddComponent<NumericNoticeComponent>();
+                unit.GetComponent<NumericNoticeComponent>()?.NoticeImmdiately(args);
+            }
 
             await ETTask.CompletedTask;
         }

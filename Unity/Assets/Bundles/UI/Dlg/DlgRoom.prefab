@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 3691295272181996160}
   - component: {fileID: 8731028593605738859}
   m_Layer: 0
-  m_Name: End
+  m_Name: EButton_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -895,7 +895,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 3691295272181996160}
   m_OnClick:
     m_PersistentCalls:
@@ -2391,8 +2391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabSource:
-    prefabName: 
-    poolSize: 5
+    prefabName: Item_backhero
+    poolSize: 10
   totalCount: 0
   reverseDirection: 0
   m_Content: {fileID: 1249501281925259917}
@@ -2949,8 +2949,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabSource:
-    prefabName: 
-    poolSize: 5
+    prefabName: Item_hardhero
+    poolSize: 10
   totalCount: 0
   reverseDirection: 0
   m_Content: {fileID: 2334739209595877825}
@@ -3818,7 +3818,7 @@ GameObject:
   - component: {fileID: 5742033834575165667}
   - component: {fileID: 8323390390515341976}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ELabel_Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3899,7 +3899,7 @@ GameObject:
   - component: {fileID: 5757378728596738072}
   - component: {fileID: 2518907944981802691}
   m_Layer: 5
-  m_Name: GG
+  m_Name: EButton_GG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

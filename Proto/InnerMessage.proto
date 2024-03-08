@@ -373,6 +373,7 @@ message G2Match_EnterMatch //IActorRequest
 	int64 UnitId = 2;
 	int64 GateSessionActorId = 3;
 	int32 MMR = 4;
+	int64 PlayerInstanceId = 5;
 }
 
 
@@ -397,4 +398,24 @@ message Match2G_RequestExitMatch //IActorResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType G2Match_GGMatch
+message Match2G_GGMatch //IActorRequest
+{
+	int32 RpcId = 90;
+	int64 UnitId = 1;
+	int32 Win = 2;
+	int64 PlayerInstanceId = 3;
+}
+
+message G2Match_GGMatch //IActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int64 UnitId = 1;
+	int32 Win = 2;
+}
+
 

@@ -17,7 +17,7 @@ namespace ET
 
 
         /// <summary>
-        /// 所有游戏中的房间列表
+        /// 所有游戏中的房间列表ROOMID/ROOM
         /// </summary>
         public readonly Dictionary<long, Room> GamingLandlordsRooms = new Dictionary<long, Room>();
 

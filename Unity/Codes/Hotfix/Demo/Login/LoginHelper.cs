@@ -7,6 +7,7 @@ namespace ET
     [FriendClassAttribute(typeof(ET.AccountInfoComponent))]
     [FriendClassAttribute(typeof(ET.ServerInfoComponent))]
     [FriendClassAttribute(typeof(ET.RoleInfoComponent))]
+    [FriendClassAttribute(typeof(ET.HeroInfoComponent))]
     public static class LoginHelper
     {
         //public static async ETTask Login(Scene zoneScene, string address, string account, string password)
@@ -298,7 +299,7 @@ namespace ET
 
             Session gateSession = zoneScene.GetComponent<NetKcpComponent>().Create(NetworkHelper.ToIPEndPoint(r2C_LoginRealm.GateAddress));
             gateSession.AddComponent<PingComponent>();
-           
+
             zoneScene.GetComponent<SessionComponent>().Session = gateSession;
 
             //开始连接Gate
@@ -310,11 +311,11 @@ namespace ET
             try
             {
                 long accountId = zoneScene.GetComponent<AccountInfoComponent>().AccountId;
-                g2C_LoginGameGate = (G2C_LoginGameGate)await gateSession.Call(new C2G_LoginGameGate() 
-                { 
-                    Key = r2C_LoginRealm.GateSessionKey, 
-                    AccountId = accountId, 
-                    RoleId = currentRoleId 
+                g2C_LoginGameGate = (G2C_LoginGameGate)await gateSession.Call(new C2G_LoginGameGate()
+                {
+                    Key = r2C_LoginRealm.GateSessionKey,
+                    AccountId = accountId,
+                    RoleId = currentRoleId
                 });
 
                 Log.Debug("登录Gate成功");
@@ -362,6 +363,7 @@ namespace ET
             Log.Debug("角色进入游戏成功");
 
             zoneScene.GetComponent<PlayerComponent>().MyId = g2C_EnterGame.MyId;
+            zoneScene.GetComponent<HeroInfoComponent>().MyCardNum = g2C_EnterGame.HeroCardList;
 
 
             await zoneScene.GetComponent<ObjectWait>().Wait<WaitType.Wait_SceneChangeFinish>();

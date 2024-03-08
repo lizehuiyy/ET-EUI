@@ -11,6 +11,7 @@ namespace ET
     [FriendClassAttribute(typeof(ET.GateMapComponent))]
     [FriendClassAttribute(typeof(ET.RoleInfo))]
     [FriendClassAttribute(typeof(ET.UnitGateComponent))]
+    [FriendClassAttribute(typeof(ET.HeroInfoComponent))]
     public class C2G_EnterGameHandler : AMRpcHandler<C2G_EnterGame, G2C_EnterGame>
     {
         protected override async ETTask Run(Session session, C2G_EnterGame request, G2C_EnterGame response, Action reply)
@@ -38,6 +39,7 @@ namespace ET
             }
 
             Player player = Game.EventSystem.Get(sessionPlayerComponent.PlayerInstanceId) as Player;
+            
             if (player == null || player.IsDisposed)
             {
                 response.Error = ErrorCode.ERR_NonePlayerError;
@@ -109,12 +111,15 @@ namespace ET
                         unit.AddComponent<UnitGateComponent, long>(player.InstanceId);
 
                         player.ChatInfoInstanceId = await this.EnterWorldChatServer(unit);//登录聊天服
-                        player.MatchInstanceId = await this.EnterMatchServer(unit);//登录寻找比赛服
-
+                        player.MatchInstanceId = await this.EnterMatchServer(unit, sessionPlayerComponent.PlayerInstanceId);//登录寻找比赛服
+                        player.unit = unit;
 
                         await UnitHelper.InitUnit(unit, isNewPlayer);
 
                         response.MyId = unit.Id;
+                        
+                        if (unit.GetComponent<HeroInfoComponent>()!=null && unit.GetComponent<HeroInfoComponent>().MyCardNum != null)
+                            response.HeroCardList = unit.GetComponent<HeroInfoComponent>().MyCardNum;
                         reply();
 
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "Map");
@@ -163,7 +168,7 @@ namespace ET
 
             return chat2G_EnterChat.ChatInfoUnitInstanceId;
         }
-        private async ETTask<long> EnterMatchServer(Unit unit)
+        private async ETTask<long> EnterMatchServer(Unit unit,long playerInstanceId)
         {
 
             Log.Debug(" + unit.GetComponent<RoleInfo>().Name" + unit.GetComponent<RoleInfo>().Name);
@@ -174,13 +179,13 @@ namespace ET
                 Name = unit.GetComponent<RoleInfo>().Name,
                 GateSessionActorId = unit.GetComponent<UnitGateComponent>().GateSessionActorId,
                 MMR = unit.GetComponent<NumericComponent>().GetAsInt((int)NumericType.MMR),
-
-            });
+                PlayerInstanceId = playerInstanceId,
+            }); 
 
             return match2G_EnterMatch.MatchInfoUnitInstanceId;
         }
 
 
-        
+
     }
 }

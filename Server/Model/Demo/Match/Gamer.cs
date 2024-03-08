@@ -14,7 +14,9 @@ namespace ET
         /// </summary>
         public long UserID { get; set; }
         public long GateSessionActorId { get; set; }
+        public long PlayerInstanceId { get; set; }
         public string Name { get; set; }
+
         public int MMR { get; set; }
         /// <summary>
         /// 玩家GateActorID

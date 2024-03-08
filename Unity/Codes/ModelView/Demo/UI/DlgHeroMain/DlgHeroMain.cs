@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ET
 {
@@ -10,7 +11,10 @@ namespace ET
 
         public Dictionary<int, Scroll_Item_hero> ScrollItemHeroDic;
 
-		public static int DragCardId = 0;
+        public Dictionary<int, Scroll_Item_HeroSmall> ScrollItemMyCardDic;
+
+
+
 
     }
 }

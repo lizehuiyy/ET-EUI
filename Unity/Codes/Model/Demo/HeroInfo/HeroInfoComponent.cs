@@ -11,7 +11,8 @@ namespace ET
     public class HeroInfoComponent : Entity, IAwake, IDestroy
     {
         public int SelectHero = 0;
-
+        public int DragCardId;
+        public List<int> MyCardNum;
 
 
     }

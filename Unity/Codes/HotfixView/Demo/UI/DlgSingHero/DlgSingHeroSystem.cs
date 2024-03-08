@@ -31,7 +31,6 @@ namespace ET
         public static void OnCloseHandler(this DlgSingHero self)
         {
             self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SingHero);
-            self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HeroMain);
 
         }
 

@@ -24,6 +24,7 @@
     {
         public long Account { get; set; }
 
+        public Unit unit { get; set; }
         public long SessionInstanceId { get; set; }
         public Session ClientSession { get; set; }
 

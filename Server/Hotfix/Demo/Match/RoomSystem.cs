@@ -26,7 +26,8 @@ namespace ET
         public static void GameStart(this Room self)
         {
             //更改房间状态 从空闲房间移除 添加到游戏中房间列表
-            LandMatchComponent Match = Game.Scene.GetComponent<LandMatchComponent>();
+            LandMatchComponent Match = self.DomainScene().GetComponent<LandMatchComponent>();
+
             Match.FreeLandlordsRooms.Remove(self.Id);
             Match.GamingLandlordsRooms.Add(self.Id, self);
 
@@ -40,9 +41,10 @@ namespace ET
 
             //添加开始斗地主游戏需要的组件
             //...
-
+            self.AddComponent<GameControllerComponent>();
+            
             //开始游戏
-            //self.GetComponent<GameControllerComponent>().StartGame();
+            self.GetComponent<GameControllerComponent>().StartGame();
         }
         public static Gamer GetGamerFromUserID(this Room self, long id)
         {

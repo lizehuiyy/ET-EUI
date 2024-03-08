@@ -68,5 +68,11 @@ namespace ET
 		 public const ushort Match2C_StartMatch = 10065;
 		 public const ushort MatchProto = 10066;
 		 public const ushort Match2C_StartMatchSuccess = 10067;
+		 public const ushort C2G_SaveCard = 10068;
+		 public const ushort G2C_SaveCard = 10069;
+		 public const ushort C2Match_EndRoundMatch = 10070;
+		 public const ushort Match2C_EndRoundMatch = 10071;
+		 public const ushort C2Match_GGMatch = 10072;
+		 public const ushort Match2C_GGMatch = 10073;
 	}
 }

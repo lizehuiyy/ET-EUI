@@ -53,5 +53,7 @@ namespace ET
 		 public const ushort Match2G_EnterMatch = 20050;
 		 public const ushort G2Match_RequestExitMatch = 20051;
 		 public const ushort Match2G_RequestExitMatch = 20052;
+		 public const ushort Match2G_GGMatch = 20053;
+		 public const ushort G2Match_GGMatch = 20054;
 	}
 }

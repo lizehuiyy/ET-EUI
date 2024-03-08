@@ -75,6 +75,40 @@ namespace ET
      		}
      	}
 
+		public UnityEngine.UI.Button EButton_SaveCardButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_SaveCardButton == null )
+     			{
+		    		this.m_EButton_SaveCardButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EGBackGround/EButton_SaveCard");
+     			}
+     			return this.m_EButton_SaveCardButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image EButton_SaveCardImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_SaveCardImage == null )
+     			{
+		    		this.m_EButton_SaveCardImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EGBackGround/EButton_SaveCard");
+     			}
+     			return this.m_EButton_SaveCardImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text ELabel_LvText
      	{
      		get
@@ -132,6 +166,8 @@ namespace ET
 			this.m_ELoopScrollList_HeroLoopVerticalScrollRect = null;
 			this.m_ELoopScrollList_MyCardLoopVerticalScrollRect = null;
 			this.m_ELabel_CardsNumText = null;
+			this.m_EButton_SaveCardButton = null;
+			this.m_EButton_SaveCardImage = null;
 			this.m_ELabel_LvText = null;
 			this.m_ELabel_CoinText = null;
 			this.m_ELabel_MMRText = null;
@@ -142,6 +178,8 @@ namespace ET
 		private UnityEngine.UI.LoopVerticalScrollRect m_ELoopScrollList_HeroLoopVerticalScrollRect = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_ELoopScrollList_MyCardLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Text m_ELabel_CardsNumText = null;
+		private UnityEngine.UI.Button m_EButton_SaveCardButton = null;
+		private UnityEngine.UI.Image m_EButton_SaveCardImage = null;
 		private UnityEngine.UI.Text m_ELabel_LvText = null;
 		private UnityEngine.UI.Text m_ELabel_CoinText = null;
 		private UnityEngine.UI.Text m_ELabel_MMRText = null;
