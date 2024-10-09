@@ -66,13 +66,21 @@ namespace ET
 		 public const ushort Rank2C_GetRankInfo = 10063;
 		 public const ushort C2Match_StartMatch = 10064;
 		 public const ushort Match2C_StartMatch = 10065;
-		 public const ushort MatchProto = 10066;
-		 public const ushort Match2C_StartMatchSuccess = 10067;
-		 public const ushort C2G_SaveCard = 10068;
-		 public const ushort G2C_SaveCard = 10069;
-		 public const ushort C2Match_EndRoundMatch = 10070;
-		 public const ushort Match2C_EndRoundMatch = 10071;
-		 public const ushort C2Match_GGMatch = 10072;
-		 public const ushort Match2C_GGMatch = 10073;
+		 public const ushort MatchSuccessProto = 10066;
+		 public const ushort NotStageCard = 10067;
+		 public const ushort Match2C_StartMatchSuccess = 10068;
+		 public const ushort C2G_SaveCard = 10069;
+		 public const ushort G2C_SaveCard = 10070;
+		 public const ushort UseCardProto = 10071;
+		 public const ushort SkillCard = 10072;
+		 public const ushort StageCardProto = 10073;
+		 public const ushort C2Match_EndRoundMatch = 10074;
+		 public const ushort Match2C_EndRoundMatch = 10075;
+		 public const ushort BuffProto = 10076;
+		 public const ushort CardResult = 10077;
+		 public const ushort PlayerRoundResult = 10078;
+		 public const ushort Match2C_EndRoundResponse = 10079;
+		 public const ushort C2Match_GGMatch = 10080;
+		 public const ushort Match2C_GGMatch = 10081;
 	}
 }

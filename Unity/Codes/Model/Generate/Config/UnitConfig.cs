@@ -84,18 +84,24 @@ namespace ET
 		/// <summary>名字</summary>
 		[ProtoMember(3)]
 		public string Name { get; set; }
-		/// <summary>描述</summary>
+		/// <summary>技能类型</summary>
 		[ProtoMember(4)]
+		public string type { get; set; }
+		/// <summary>描述</summary>
+		[ProtoMember(5)]
 		public string Desc { get; set; }
 		/// <summary>位置</summary>
-		[ProtoMember(5)]
+		[ProtoMember(6)]
 		public int Position { get; set; }
 		/// <summary>攻击</summary>
-		[ProtoMember(6)]
+		[ProtoMember(7)]
 		public int attack { get; set; }
 		/// <summary>生命</summary>
-		[ProtoMember(7)]
+		[ProtoMember(8)]
 		public int life { get; set; }
+		/// <summary>打钱</summary>
+		[ProtoMember(9)]
+		public int fram { get; set; }
 
 	}
 }

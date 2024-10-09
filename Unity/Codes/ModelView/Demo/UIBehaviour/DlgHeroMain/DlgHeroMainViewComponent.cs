@@ -109,6 +109,74 @@ namespace ET
      		}
      	}
 
+		public UnityEngine.UI.Button EButton_BackButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_BackButton == null )
+     			{
+		    		this.m_EButton_BackButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EGBackGround/EButton_Back");
+     			}
+     			return this.m_EButton_BackButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image EButton_BackImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_BackImage == null )
+     			{
+		    		this.m_EButton_BackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EGBackGround/EButton_Back");
+     			}
+     			return this.m_EButton_BackImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button EButton_ClearButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_ClearButton == null )
+     			{
+		    		this.m_EButton_ClearButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EGBackGround/EButton_Clear");
+     			}
+     			return this.m_EButton_ClearButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image EButton_ClearImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EButton_ClearImage == null )
+     			{
+		    		this.m_EButton_ClearImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EGBackGround/EButton_Clear");
+     			}
+     			return this.m_EButton_ClearImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text ELabel_LvText
      	{
      		get
@@ -168,6 +236,10 @@ namespace ET
 			this.m_ELabel_CardsNumText = null;
 			this.m_EButton_SaveCardButton = null;
 			this.m_EButton_SaveCardImage = null;
+			this.m_EButton_BackButton = null;
+			this.m_EButton_BackImage = null;
+			this.m_EButton_ClearButton = null;
+			this.m_EButton_ClearImage = null;
 			this.m_ELabel_LvText = null;
 			this.m_ELabel_CoinText = null;
 			this.m_ELabel_MMRText = null;
@@ -180,6 +252,10 @@ namespace ET
 		private UnityEngine.UI.Text m_ELabel_CardsNumText = null;
 		private UnityEngine.UI.Button m_EButton_SaveCardButton = null;
 		private UnityEngine.UI.Image m_EButton_SaveCardImage = null;
+		private UnityEngine.UI.Button m_EButton_BackButton = null;
+		private UnityEngine.UI.Image m_EButton_BackImage = null;
+		private UnityEngine.UI.Button m_EButton_ClearButton = null;
+		private UnityEngine.UI.Image m_EButton_ClearImage = null;
 		private UnityEngine.UI.Text m_ELabel_LvText = null;
 		private UnityEngine.UI.Text m_ELabel_CoinText = null;
 		private UnityEngine.UI.Text m_ELabel_MMRText = null;

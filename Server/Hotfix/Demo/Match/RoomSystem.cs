@@ -16,6 +16,13 @@ namespace ET
             }
         }
     }
+    public class RoomAwakeSystem : AwakeSystem<Room>
+    {
+        public override void Awake(Room self)
+        {
+
+        }
+    }
     [FriendClassAttribute(typeof(ET.Room))]
     [FriendClassAttribute(typeof(ET.LandMatchComponent))]
     public static class RoomSystem
@@ -42,7 +49,7 @@ namespace ET
             //添加开始斗地主游戏需要的组件
             //...
             self.AddComponent<GameControllerComponent>();
-            
+
             //开始游戏
             self.GetComponent<GameControllerComponent>().StartGame();
         }
@@ -55,6 +62,14 @@ namespace ET
             }
 
             return null;
+        }
+
+        public static long GetOtherUserId(this Room self, long id)
+        {
+            int seatIndex = self.GetGamerSeat(id);
+            int otherSeat = seatIndex == 0 ? 1 : 0;
+            return self.gamers[seatIndex].UserID;
+
         }
 
         public static int GetGamerSeat(this Room self, long id)
@@ -102,6 +117,34 @@ namespace ET
             }
 
             return -1;
+        }
+
+        public static async ETTask GameOver(this Room self)
+        {
+
+
+            foreach (Gamer gamers in self.gamers)
+            {
+
+                Match2G_GGMatch message = new Match2G_GGMatch();
+
+                long instanceId = gamers.GateSessionActorId;
+                message.UnitId = gamers.UserID;
+                message.PlayerInstanceId = gamers.PlayerInstanceId;
+                if (gamers.win == 2)
+                {
+                    message.Win = 2;
+
+                }
+                else
+                {
+                    message.Win = 1;
+                }
+
+                StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(gamers.DomainZone(), "Map");
+                G2Match_GGMatch g2Match_GGMatch = (G2Match_GGMatch)await MessageHelper.CallActor(startSceneConfig.InstanceId, message);
+
+            }
         }
     }
 

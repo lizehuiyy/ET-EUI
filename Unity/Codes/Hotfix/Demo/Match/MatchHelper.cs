@@ -9,6 +9,7 @@ namespace ET
 {
     [FriendClassAttribute(typeof(ET.HeroInfoComponent))]
     [FriendClassAttribute(typeof(ET.AccountInfoComponent))]
+    [FriendClassAttribute(typeof(ET.GameControlComponent))]
     public static class MatchHelper
     {
         public static async ETTask<int> StartMatch(Scene zoneScene)
@@ -79,13 +80,22 @@ namespace ET
 
         public static async ETTask<int> EndRoundMatch(Scene zoneScene)
         {
-            //角色请求进入寻找比赛
+            //角色回合结束
             Session gateSession = zoneScene.GetComponent<SessionComponent>().Session;
-
+            Log.Debug("EndRoundMatch");
             Match2C_EndRoundMatch match2C_EndRoundMatch = null;
             try
             {
-                match2C_EndRoundMatch = (Match2C_EndRoundMatch)await gateSession.Call(new C2Match_EndRoundMatch() { });
+                
+
+                match2C_EndRoundMatch = (Match2C_EndRoundMatch)await gateSession.Call(new C2Match_EndRoundMatch() {
+                    //UseCardList.add(Game.zoneScene.GetComponent<Room>().GetComponent<GameControlComponent>().UseCardList),
+                    UseCardList = Game.zoneScene.GetComponent<Room>().GetComponent<GameControlComponent>().UseCardList,
+                    StageCardList = Game.zoneScene.GetComponent<Room>().GetComponent<GameControlComponent>().StageCardList,
+
+
+
+                });
             }
             catch (Exception e)
             {
@@ -134,7 +144,7 @@ namespace ET
             }
 
             Log.Debug("投降成功");
-            
+
 
             return ErrorCode.ERR_Success;
         }

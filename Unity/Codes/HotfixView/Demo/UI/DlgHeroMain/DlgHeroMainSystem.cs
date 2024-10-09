@@ -31,6 +31,10 @@ namespace ET
                 self.OnSrcollItemMyCardHandler(transform, index);
             });
             self.View.EButton_SaveCardButton.AddListenAsync(() => { return self.OnClickSaveHandler(); });
+            self.View.EButton_ClearButton.AddListenAsync(() => { return self.OnClickClearHandler(); });
+
+            self.View.EButton_BackButton.AddListenAsync(() => { return self.OnClickBackHandler(); });
+
 
         }
 
@@ -46,6 +50,10 @@ namespace ET
         public static void ShowMyCard(this DlgHeroMain self, Entity contextData = null)
         {
             int count = self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Log.Debug(self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum[i] + "i" + i);
+            }
             self.AddUIScrollItems(ref self.ScrollItemMyCardDic, count);
             self.View.ELoopScrollList_MyCardLoopVerticalScrollRect.SetVisible(true, count);
             self.View.ELabel_CardsNumText.SetText("CardNum:" + count);
@@ -65,32 +73,37 @@ namespace ET
             Scroll_Item_HeroSmall ItemHero = self.ScrollItemMyCardDic[index].BindTrans(transform);
             int cardid = self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum[index];
 
-            var config = UnitConfigCategory.Instance.GetAll()[cardid];
-
-            ItemHero.ELabel_NameText.text = config.Name;
-            ItemHero.ELabel_Name1Text.text = config.Name;
-            ItemHero.ELabel_IdText.text = cardid.ToString();
-
+            ItemHero.ELabel_NameText.gameObject.GetComponent<EventTrigger>().triggers.Clear();
+            if (UnitConfigCategory.Instance.GetAll().ContainsKey(cardid))
+            {
+                var config = UnitConfigCategory.Instance.GetAll()[cardid];
+                ItemHero.ELabel_NameText.text = config.Name;
+                ItemHero.ELabel_Name1Text.text = config.Name;
+                ItemHero.ELabel_IdText.text = cardid.ToString();
+            }
             EventTrigger.Entry entry = new EventTrigger.Entry(); // 保存有事件类型，和回调函数
-            entry.eventID = EventTriggerType.BeginDrag;
-            entry.callback.AddListener((BaseEventData eventData) => {
-                OnBeginDragMyCard(ItemHero.ELabel_NameText.gameObject, eventData);
-            });
-            ItemHero.ELabel_NameText.gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
+                entry.eventID = EventTriggerType.BeginDrag;
+                entry.callback.AddListener((BaseEventData eventData) => {
+                    OnBeginDragMyCard(ItemHero.ELabel_NameText.gameObject, eventData);
+                });
+                ItemHero.ELabel_NameText.gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
 
-            EventTrigger.Entry entry1 = new EventTrigger.Entry(); // 保存有事件类型，和回调函数
-            entry1.eventID = EventTriggerType.Drag;
-            entry1.callback.AddListener((BaseEventData eventData) => {
-                OnDragMyCard(ItemHero.ELabel_NameText.gameObject, eventData);
-            });
-            ItemHero.ELabel_NameText.GetComponent<EventTrigger>().triggers.Add(entry1);
+                EventTrigger.Entry entry1 = new EventTrigger.Entry(); // 保存有事件类型，和回调函数
+                entry1.eventID = EventTriggerType.Drag;
+                entry1.callback.AddListener((BaseEventData eventData) => {
+                    OnDragMyCard(ItemHero.ELabel_NameText.gameObject, eventData);
+                });
+                ItemHero.ELabel_NameText.GetComponent<EventTrigger>().triggers.Add(entry1);
 
-            EventTrigger.Entry entry2 = new EventTrigger.Entry(); // 保存有事件类型，和回调函数
-            entry2.eventID = EventTriggerType.EndDrag;
-            entry2.callback.AddListener((BaseEventData eventData) => {
-                OnEndDragMyCard(ItemHero.ELabel_NameText.gameObject, eventData);
-            });
-            ItemHero.ELabel_NameText.GetComponent<EventTrigger>().triggers.Add(entry2);
+                EventTrigger.Entry entry2 = new EventTrigger.Entry(); // 保存有事件类型，和回调函数
+                entry2.eventID = EventTriggerType.EndDrag;
+                entry2.callback.AddListener((BaseEventData eventData) => {
+                    OnEndDragMyCard(ItemHero.ELabel_NameText.gameObject, eventData);
+                });
+                ItemHero.ELabel_NameText.GetComponent<EventTrigger>().triggers.Add(entry2);
+
+           
+                
 
 
             //EventListener.Get(ItemHero.ELabel_NameText.gameObject).onBeginDrag = OnBeginDragMyCard;
@@ -314,7 +327,7 @@ namespace ET
                 (Math.Abs(mouseLocal.y - MyCard.transform.localPosition.y) < MyCard.sizeDelta.y / 2))
             {
                 //Log.Debug(Game.zoneScene.GetComponent<HeroInfoComponent>().MyCardNum+"在里面" + Game.zoneScene.GetComponent<HeroInfoComponent>().DragCardId);
-                if (!Game.zoneScene.GetComponent<HeroInfoComponent>().MyCardNum.Contains(Game.zoneScene.GetComponent<HeroInfoComponent>().DragCardId))
+                if (!Game.zoneScene.GetComponent<HeroInfoComponent>().MyCardNum.Contains(Game.zoneScene.GetComponent<HeroInfoComponent>().DragCardId ) && Game.zoneScene.GetComponent<HeroInfoComponent>().DragCardId != 0)
                 { 
                     Game.zoneScene.GetComponent<HeroInfoComponent>().MyCardNum.Add(Game.zoneScene.GetComponent<HeroInfoComponent>().DragCardId);
                     Game.zoneScene.GetComponent<UIComponent>().GetDlgLogic<DlgHeroMain>()?.ShowMyCard();
@@ -441,6 +454,23 @@ namespace ET
             self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_SingHero);
         }
 
+        public static async ETTask OnClickBackHandler(this DlgHeroMain self)
+        {
+            self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_GameMain);
+            self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HeroMain);
+            await ETTask.CompletedTask;
+        }
+        public static async ETTask OnClickClearHandler(this DlgHeroMain self)
+        {
+            self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum.Clear();
+
+            int count = self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum.Count;
+            self.AddUIScrollItems(ref self.ScrollItemMyCardDic, count);
+            self.View.ELoopScrollList_MyCardLoopVerticalScrollRect.SetVisible(true, count);
+            self.View.ELabel_CardsNumText.SetText("CardNum:" + count);
+            self.View.EButton_SaveCardButton.interactable = false;
+            await ETTask.CompletedTask;
+        }
         public static async ETTask OnClickSaveHandler(this DlgHeroMain self)
         {
             Log.Debug("OnClickSaveHandler");

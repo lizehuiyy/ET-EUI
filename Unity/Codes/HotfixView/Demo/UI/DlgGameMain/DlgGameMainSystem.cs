@@ -8,6 +8,7 @@ namespace ET
 {
     [FriendClass(typeof(DlgGameMain))]
     [FriendClassAttribute(typeof(ET.HeroInfoComponent))]
+    [FriendClassAttribute(typeof(ET.GameControlComponent))]
     public static class DlgGameMainSystem
     {
 
@@ -23,22 +24,22 @@ namespace ET
 
         public static void ShowWindow(this DlgGameMain self, Entity contextData = null)
         {
-
+           
 
             self.Refresh().Coroutine();
         }
 
-
+        
         public static async ETTask Refresh(this DlgGameMain self)
         {
-
-
+          
             Unit unit = UnitHelper.GetMyUnitFromCurrentScene(self.ZoneScene().CurrentScene());
             NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
             Log.Debug(numericComponent.GetAsInt((int)NumericType.Level) + "RefreshRefreshRefresh" + numericComponent.GetAsInt((int)NumericType.Gold) + "MMR:" + numericComponent.GetAsInt((int)NumericType.MMR));
             self.View.ELabel_LvText.SetText($"LV:{numericComponent.GetAsInt((int)NumericType.Level)}");
             self.View.ELabel_CoinText.SetText($"Coin:{numericComponent.GetAsInt((int)NumericType.Gold)}");
             self.View.ELabel_MMRText.SetText($"MMR:{numericComponent.GetAsInt((int)NumericType.MMR)}");
+
 
             await ETTask.CompletedTask;
         }
@@ -64,7 +65,7 @@ namespace ET
         public static async ETTask OnStartClickHandler(this DlgGameMain self)
         {
             Log.Debug("OnStartClickHandler");
-            if (self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum.Count!= 30)
+            if (self.ZoneScene().GetComponent<HeroInfoComponent>().MyCardNum.Count != 30)
             {
 
                 self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Tips);

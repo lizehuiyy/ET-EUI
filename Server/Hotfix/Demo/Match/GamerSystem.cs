@@ -23,27 +23,6 @@ namespace ET
     public static class GamerSystem
     {
 
-        public static void FromMessage(this Gamer self, MatchProto matchProto)
-        {
-            self.Id = matchProto.ID;
-            self.UserID = matchProto.UnitId;
-            self.Name = matchProto.Name;
-            self.MMR = matchProto.MMR;
-        }
-
-        public static MatchProto ToMessage(this Gamer self)
-        {
-            MatchProto matchProto = new MatchProto();
-            matchProto.ID = self.Id;
-            matchProto.UnitId = self.UserID;
-            matchProto.Name = self.Name;
-            matchProto.MMR = self.MMR;
-            return matchProto;
-        }
-
-
-
-
 
     }
 }

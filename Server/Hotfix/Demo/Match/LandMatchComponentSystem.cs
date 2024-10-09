@@ -199,20 +199,39 @@ namespace ET
             {
                 room.GameStart();
 
+                List<MatchSuccessProto> protolist = new List<MatchSuccessProto>();
+
                 foreach (var roomGamer in room.gamers)
                 {
+                    MatchSuccessProto proto = new MatchSuccessProto();
+                    proto.CardNum = roomGamer.GetComponent<DeckComponent>().HardDeck.Count;
+                    proto.UnitId = roomGamer.UserID;
+                    proto.MMR = roomGamer.MMR;
+                    proto.Name = roomGamer.Name;
+                    proto.Coin = roomGamer.GetComponent<DeckComponent>().Coin;
+                    proto.TowerHp = roomGamer.GetComponent<DeckComponent>().TowerHP;
+                    protolist.Add(proto);
+                }
+                foreach (var roomGamer in room.gamers)
+                {
+                    List<NotStageCard> CardList = new List<NotStageCard>();
+
+                    foreach (var card in roomGamer.GetComponent<DeckComponent>().HardDeck)
+                    {
+                        NotStageCard item = new NotStageCard();
+                        item.CardId = card.CardId;
+                        item.Star = 1;
+                        CardList.Add(item);
+                    }
+
+
                     MessageHelper.SendActor(roomGamer.GateSessionActorId, new Match2C_StartMatchSuccess()
                     {
-                        UnitId1 = room.gamers[0].UserID,
-                        Name1 = room.gamers[0].Name,
-                        MMR1 = room.gamers[0].MMR,
-                        UnitId2 = room.gamers[1].UserID,
-                        Name2 = room.gamers[1].Name,
-                        MMR2 = room.gamers[1].MMR,
-                        HeroCardList = roomGamer.GetComponent<DeckComponent>().HardDeck,
-                        
+                        Proto = protolist,
+                        HeroCardList = CardList,
 
-                    });
+
+                    }) ;
                 }
             }
 

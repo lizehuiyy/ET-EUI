@@ -118,5 +118,10 @@ namespace ET
         {
             public Scene zoneScene;
         }
+
+        public struct EndRoundRoom
+        {
+            public Scene zoneScene;
+        }
     }
 }

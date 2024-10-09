@@ -127,6 +127,23 @@ namespace ET
      		}
      	}
 
+		public UnityEngine.RectTransform EGprite_CoinRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EGprite_CoinRectTransform == null )
+     			{
+		    		this.m_EGprite_CoinRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EGprite_Coin");
+     			}
+     			return this.m_EGprite_CoinRectTransform;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_LoginButton = null;
@@ -137,6 +154,7 @@ namespace ET
 			this.m_E_PasswordImage = null;
 			this.m_escommonui?.Dispose();
 			this.m_escommonui = null;
+			this.m_EGprite_CoinRectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -147,6 +165,7 @@ namespace ET
 		private UnityEngine.UI.InputField m_E_PasswordInputField = null;
 		private UnityEngine.UI.Image m_E_PasswordImage = null;
 		private ESCommonUI m_escommonui = null;
+		private UnityEngine.RectTransform m_EGprite_CoinRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

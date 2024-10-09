@@ -28,7 +28,7 @@ namespace ET
                 message.PlayerInstanceId = gamers.PlayerInstanceId;
                 if (gamers.UserID == gamer.UserID)
                 {
-                    message.Win = 0;
+                    message.Win = 2;
                     
                 }
                 else

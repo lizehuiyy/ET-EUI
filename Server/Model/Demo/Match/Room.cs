@@ -19,6 +19,7 @@ namespace ET
         /// 当前房间的所有所有玩家 空位为null
         /// </summary>
         public readonly Gamer[] gamers = new Gamer[2];
+        public Dictionary<long, int> Round = new Dictionary<long, int>();
 
         /// <summary>
         /// 房间中玩家的数量

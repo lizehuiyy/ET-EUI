@@ -16,7 +16,7 @@ namespace ET
         public long GateSessionActorId { get; set; }
         public long PlayerInstanceId { get; set; }
         public string Name { get; set; }
-
+        //天梯分
         public int MMR { get; set; }
         /// <summary>
         /// 玩家GateActorID
@@ -30,5 +30,13 @@ namespace ET
         /// 默认为假 Session断开/离开房间时触发离线
         /// </summary>
         public bool isOffline { get; set; }
+        public int win { get; set; }
+
+
+
+
+
+
+
     }
 }

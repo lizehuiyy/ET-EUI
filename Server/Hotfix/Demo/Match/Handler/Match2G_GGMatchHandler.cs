@@ -28,8 +28,14 @@ namespace ET
             int newMMR = 0;
             if (request.Win == 1)
                 newMMR = numericComponent.GetAsInt(NumericType.MMR) + 25;
-            else
+            else if (request.Win == 2)
                 newMMR = numericComponent.GetAsInt(NumericType.MMR) - 25;
+            else if (request.Win == 3)
+            { 
+            
+            }
+
+
             if (newMMR < 0)
             {
                 newMMR = 0;

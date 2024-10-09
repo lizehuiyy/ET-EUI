@@ -11,11 +11,12 @@ namespace ET
         protected override async ETTask Run(Gamer gamer, G2Match_RequestExitMatch request, Match2G_RequestExitMatch response, Action reply)
         {
             LandMatchComponent landMatchComponent = gamer.DomainScene().GetComponent<LandMatchComponent>();
-            landMatchComponent.RemoveLandMatch(gamer.Id);
-            landMatchComponent.RemoveGamingMatch(gamer.Id);
-            landMatchComponent.RemoveFreeLandMatch(gamer.Id);
-            landMatchComponent.RemoveWaitingMatch(gamer.Id);
-            landMatchComponent.RemovePlayingMatch(gamer.Id);
+            landMatchComponent.RemoveLandMatch(gamer.UserID);
+            //landMatchComponent.RemoveLandMatch(gamer.Id);
+            //landMatchComponent.RemoveGamingMatch(gamer.Id);
+            //landMatchComponent.RemoveFreeLandMatch(gamer.Id);
+            //landMatchComponent.RemoveWaitingMatch(gamer.Id);
+            //landMatchComponent.RemovePlayingMatch(gamer.Id);
 
             reply();
             await ETTask.CompletedTask;

@@ -21,8 +21,17 @@ namespace ET
     {
         public override void Destroy(GameControlComponent self)
         {
-            
 
+
+        }
+    }
+    public class GameControlComponentAwakeSystem : AwakeSystem<GameControlComponent>
+    {
+        public override void Awake(GameControlComponent self)
+        {
+            self.UseCardList = new List<UseCardProto>();
+            self.StageCardList = new List<StageCardProto>();
+            self.PlayerRoundResultList = new List<PlayerRoundResult>();
         }
     }
 }

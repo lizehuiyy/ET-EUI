@@ -4,6 +4,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using DG.Tweening;
+using ILRuntime.Runtime;
+using UnityEngine.Windows;
+
 
 namespace ET
 {
@@ -17,6 +21,37 @@ namespace ET
 
         public static void ShowWindow(this DlgLogin self, Entity contextData = null)
         {
+
+            //测试代码
+            //Vector3 back = new Vector3(0, -276, 0);
+            //Vector3 target = self.View.E_LoginImage.transform.parent.parent.position + new Vector3(0,0,-20);
+            //Vector3 local = new Vector3(0, -176, 0);
+
+            //self.View.E_LoginButton.transform.DOLocalMove(back, 0.2f).OnComplete(() => {
+            //self.View.E_LoginButton.transform.DOMove(target, 0.2f).SetDelay(0.3f).OnComplete(() => {
+            //    //self.View.E_LoginButton.transform.DOLocalMove(local, 0.2f).OnComplete(() => {
+
+
+            //    //});
+            //});
+            //});
+            Log.Debug("login");
+            //Vector3 target = new Vector3(0, 0, -1080);
+            //self.View.E_LoginButton.transform.DORotate(target, 3f, RotateMode.FastBeyond360).OnComplete(() =>
+            //{
+
+            //});
+
+
+
+            //string binaryString = "1111011"; // 二进制字符串
+            //int bit = Convert.ToInt32(binaryString, 2);
+            //int bit0 = (bit >> 2) & 1;
+            //Log.Debug(bit0 + "");
+            //self.View.EGprite_CoinRectTransform.transform.DOLocalRotate(new Vector3(0,360*10,0), 2f, RotateMode.FastBeyond360).SetEase(Ease.OutCubic);
+
+
+
 
 
             self.View.ESCommonUI.SetLabelContent("登录界面");

@@ -1089,21 +1089,42 @@ namespace ET
 
 	}
 
-	[Message(OuterOpcode.MatchProto)]
+	[Message(OuterOpcode.MatchSuccessProto)]
 	[ProtoContract]
-	public partial class MatchProto: Object
+	public partial class MatchSuccessProto: Object
 	{
 		[ProtoMember(1)]
-		public long ID { get; set; }
-
-		[ProtoMember(2)]
 		public long UnitId { get; set; }
 
-		[ProtoMember(3)]
+		[ProtoMember(2)]
 		public string Name { get; set; }
 
-		[ProtoMember(4)]
+		[ProtoMember(3)]
 		public int MMR { get; set; }
+
+		[ProtoMember(4)]
+		public int CardNum { get; set; }
+
+		[ProtoMember(5)]
+		public int Coin { get; set; }
+
+		[ProtoMember(6)]
+		public int TowerHp { get; set; }
+
+	}
+
+	[Message(OuterOpcode.NotStageCard)]
+	[ProtoContract]
+	public partial class NotStageCard: Object
+	{
+		[ProtoMember(1)]
+		public int CardId { get; set; }
+
+		[ProtoMember(2)]
+		public int Star { get; set; }
+
+		[ProtoMember(3)]
+		public int CardPos { get; set; }
 
 	}
 
@@ -1121,25 +1142,10 @@ namespace ET
 		public string Message { get; set; }
 
 		[ProtoMember(1)]
-		public long UnitId1 { get; set; }
+		public List<MatchSuccessProto> Proto = new List<MatchSuccessProto>();
 
 		[ProtoMember(2)]
-		public string Name1 { get; set; }
-
-		[ProtoMember(3)]
-		public int MMR1 { get; set; }
-
-		[ProtoMember(4)]
-		public long UnitId2 { get; set; }
-
-		[ProtoMember(5)]
-		public string Name2 { get; set; }
-
-		[ProtoMember(6)]
-		public int MMR2 { get; set; }
-
-		[ProtoMember(7)]
-		public List<int> HeroCardList = new List<int>();
+		public List<NotStageCard> HeroCardList = new List<NotStageCard>();
 
 	}
 
@@ -1171,6 +1177,84 @@ namespace ET
 
 	}
 
+	[Message(OuterOpcode.UseCardProto)]
+	[ProtoContract]
+	public partial class UseCardProto: Object
+	{
+		[ProtoMember(1)]
+		public int CardId { get; set; }
+
+		[ProtoMember(2)]
+		public int CardPos { get; set; }
+
+		[ProtoMember(3)]
+		public int CardStar { get; set; }
+
+		[ProtoMember(4)]
+		public int SelectCardPos { get; set; }
+
+		[ProtoMember(5)]
+		public int SelectCardPlayer { get; set; }
+
+		[ProtoMember(6)]
+		public int SelectCardId { get; set; }
+
+		[ProtoMember(7)]
+		public int SelectSkill { get; set; }
+
+		[ProtoMember(8)]
+		public List<SkillCard> CardList = new List<SkillCard>();
+
+	}
+
+	[Message(OuterOpcode.SkillCard)]
+	[ProtoContract]
+	public partial class SkillCard: Object
+	{
+		[ProtoMember(1)]
+		public int CardId { get; set; }
+
+		[ProtoMember(2)]
+		public int CardPos { get; set; }
+
+		[ProtoMember(3)]
+		public int CardStar { get; set; }
+
+		[ProtoMember(4)]
+		public int CardType { get; set; }
+
+		[ProtoMember(5)]
+		public int CardAttack { get; set; }
+
+		[ProtoMember(6)]
+		public int CardLife { get; set; }
+
+	}
+
+	[Message(OuterOpcode.StageCardProto)]
+	[ProtoContract]
+	public partial class StageCardProto: Object
+	{
+		[ProtoMember(1)]
+		public int CardId { get; set; }
+
+		[ProtoMember(2)]
+		public int CardPos { get; set; }
+
+		[ProtoMember(3)]
+		public int Fram { get; set; }
+
+		[ProtoMember(4)]
+		public int UseSkill { get; set; }
+
+		[ProtoMember(5)]
+		public int UseSkill2 { get; set; }
+
+		[ProtoMember(6)]
+		public int UpStar { get; set; }
+
+	}
+
 	[ResponseType(nameof(Match2C_EndRoundMatch))]
 	[Message(OuterOpcode.C2Match_EndRoundMatch)]
 	[ProtoContract]
@@ -1178,6 +1262,12 @@ namespace ET
 	{
 		[ProtoMember(1)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(2)]
+		public List<UseCardProto> UseCardList = new List<UseCardProto>();
+
+		[ProtoMember(3)]
+		public List<StageCardProto> StageCardList = new List<StageCardProto>();
 
 	}
 
@@ -1193,6 +1283,138 @@ namespace ET
 
 		[ProtoMember(92)]
 		public string Message { get; set; }
+
+	}
+
+	[Message(OuterOpcode.BuffProto)]
+	[ProtoContract]
+	public partial class BuffProto: Object
+	{
+		[ProtoMember(1)]
+		public int BuffCardId { get; set; }
+
+		[ProtoMember(2)]
+		public int BuffCardStar { get; set; }
+
+		[ProtoMember(3)]
+		public int BuffNum { get; set; }
+
+	}
+
+	[Message(OuterOpcode.CardResult)]
+	[ProtoContract]
+	public partial class CardResult: Object
+	{
+		[ProtoMember(1)]
+		public int CardId { get; set; }
+
+		[ProtoMember(2)]
+		public int CardPos { get; set; }
+
+		[ProtoMember(3)]
+		public int CardStar { get; set; }
+
+		[ProtoMember(4)]
+		public int TotalLife { get; set; }
+
+		[ProtoMember(5)]
+		public int TotalAttack { get; set; }
+
+		[ProtoMember(6)]
+		public int Armor { get; set; }
+
+		[ProtoMember(7)]
+		public int Mockery { get; set; }
+
+		[ProtoMember(8)]
+		public int DisarmRound { get; set; }
+
+		[ProtoMember(9)]
+		public int VertigoRound { get; set; }
+
+		[ProtoMember(10)]
+		public List<int> AttackPos = new List<int>();
+
+		[ProtoMember(11)]
+		public List<int> AttackDamage = new List<int>();
+
+		[ProtoMember(12)]
+		public List<int> ReflexDamage = new List<int>();
+
+		[ProtoMember(13)]
+		public List<int> Crit = new List<int>();
+
+		[ProtoMember(14)]
+		public List<int> ReCrit = new List<int>();
+
+		[ProtoMember(15)]
+		public List<int> Dodge = new List<int>();
+
+		[ProtoMember(16)]
+		public List<int> Blind = new List<int>();
+
+		[ProtoMember(17)]
+		public List<int> Reset = new List<int>();
+
+		[ProtoMember(18)]
+		public List<int> UseSkill = new List<int>();
+
+		[ProtoMember(19)]
+		public List<int> UseSkillDmg = new List<int>();
+
+		[ProtoMember(20)]
+		public List<BuffProto> BuffList = new List<BuffProto>();
+
+		[ProtoMember(21)]
+		public int UseSkillCD { get; set; }
+
+		[ProtoMember(22)]
+		public List<SkillCard> CardList = new List<SkillCard>();
+
+	}
+
+	[Message(OuterOpcode.PlayerRoundResult)]
+	[ProtoContract]
+	public partial class PlayerRoundResult: Object
+	{
+		[ProtoMember(1)]
+		public long UnitId { get; set; }
+
+		[ProtoMember(2)]
+		public List<CardResult> CardResultList = new List<CardResult>();
+
+		[ProtoMember(3)]
+		public int TowerHp { get; set; }
+
+		[ProtoMember(4)]
+		public List<UseCardProto> useCardList = new List<UseCardProto>();
+
+		[ProtoMember(5)]
+		public int Coin { get; set; }
+
+		[ProtoMember(6)]
+		public int winorlose { get; set; }
+
+		[ProtoMember(7)]
+		public int Round { get; set; }
+
+	}
+
+	[Message(OuterOpcode.Match2C_EndRoundResponse)]
+	[ProtoContract]
+	public partial class Match2C_EndRoundResponse: Object, IActorMessage
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public List<PlayerRoundResult> PlayerRoundResultList = new List<PlayerRoundResult>();
 
 	}
 

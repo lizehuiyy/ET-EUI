@@ -522,6 +522,9 @@ message C2Rank_GetRankInfo //IActorRankInfoRequest
 	int32 RpcId = 1;
 }
 
+
+
+
 message Rank2C_GetRankInfo //IActorRankInfoResponse
 {
 	int32 RpcId = 90;
@@ -545,12 +548,21 @@ message Match2C_StartMatch //IActorMatchResponse
 	string Message = 92;
 }
 
-message MatchProto
+message MatchSuccessProto
 {
-	int64 ID = 1;
-	int64 UnitId = 2;
-	string Name = 3;
-	int32 MMR = 4;
+	int64 UnitId = 1;
+	string Name = 2;
+	int32 MMR = 3;
+	int32 CardNum = 4;
+	int32 Coin = 5;
+	int32 TowerHp = 6;
+}
+
+message NotStageCard
+{
+	int32 CardId = 1;
+	int32 Star = 2;
+	int32 CardPos = 3;
 }
 
 message Match2C_StartMatchSuccess //IActorMessage
@@ -559,13 +571,8 @@ message Match2C_StartMatchSuccess //IActorMessage
 	int32 Error = 91;
 	string Message = 92;
 
-	int64 UnitId1 = 1;
-	string Name1 = 2;
-	int32 MMR1 = 3;
-	int64 UnitId2 = 4;
-	string Name2 = 5;
-	int32 MMR2 = 6;
-	repeated int32 HeroCardList = 7;
+	repeated MatchSuccessProto Proto = 1;
+	repeated NotStageCard HeroCardList = 2;
 
 }
 
@@ -587,7 +594,24 @@ message G2C_SaveCard //IResponse
 message UseCardProto
 {
 	int32 CardId = 1;
-	int32 CardPos = 1;
+	int32 CardPos = 2;
+	int32 CardStar = 3;
+	int32 SelectCardPos = 4;   
+	int32 SelectCardPlayer = 5; //选择目标玩家 1自身 2敌方
+	int32 SelectCardId = 6;
+	int32 SelectSkill = 7;
+	repeated SkillCard CardList = 8;//卡片使用技能卡片链表
+}
+
+message SkillCard
+{
+	int32 CardId = 1;
+	int32 CardPos = 2;
+	int32 CardStar = 3;
+	int32 CardType = 4;//1 1血分身 2米波 3猴子分身
+	int32 CardAttack = 5;
+	int32 CardLife = 6;
+
 }
 
 message StageCardProto
@@ -596,14 +620,17 @@ message StageCardProto
 	int32 CardPos = 2;
 	int32 Fram = 3;
 	int32 UseSkill = 4;
+	int32 UseSkill2 = 5;
+	int32 UpStar = 6;
 }
 
 //ResponseType Match2C_EndRoundMatch
 message C2Match_EndRoundMatch //IActorMatchRequest
 {
 	int32 RpcId = 1;
-	repeated UseCardProto Units = 2;
-	repeated StageCardProto Units = 3;
+	repeated UseCardProto UseCardList = 2;
+	repeated StageCardProto StageCardList = 3;
+
 }
 
 message Match2C_EndRoundMatch //IActorMatchResponse
@@ -611,7 +638,70 @@ message Match2C_EndRoundMatch //IActorMatchResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+
+
 }
+
+message BuffProto
+{
+	int32 BuffCardId = 1;
+	int32 BuffCardStar = 2;
+	int32 BuffNum = 3;
+}
+
+message CardResult
+{
+	int32 CardId = 1;
+	int32 CardPos = 2;
+	int32 CardStar = 3;
+	int32 TotalLife = 4;
+	int32 TotalAttack = 5;
+	int32 Armor = 6;
+	int32 Mockery = 7;
+	int32 DisarmRound = 8;
+	int32 VertigoRound = 9;
+	repeated int32 AttackPos = 10;
+	repeated int32 AttackDamage = 11;
+	repeated int32 ReflexDamage = 12;
+	repeated int32 Crit = 13;
+	repeated int32 ReCrit = 14;
+	repeated int32 Dodge = 15;
+	repeated int32 Blind = 16;
+	repeated int32 Reset = 17;
+	repeated int32 UseSkill = 18;
+	repeated int32 UseSkillDmg = 19;
+	repeated BuffProto BuffList = 20;
+	int32 UseSkillCD = 21;
+	repeated SkillCard CardList = 22;//卡片使用技能卡片链表
+
+}
+
+
+message PlayerRoundResult
+{
+	int64 UnitId = 1;
+	repeated CardResult CardResultList = 2;   //场上每张卡干了什么
+	int32 TowerHp = 3;					      //塔剩余血量
+	repeated UseCardProto useCardList = 4;    //使用的卡做了什么
+	int32 Coin = 5;							  //金币
+	int32 winorlose = 6;
+	int32 Round = 7;
+}
+
+
+message Match2C_EndRoundResponse //IActorMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated PlayerRoundResult PlayerRoundResultList = 1;
+
+
+
+}
+
+
+
 
 //ResponseType Match2C_GGMatch
 message C2Match_GGMatch //IActorMatchRequest
@@ -626,3 +716,5 @@ message Match2C_GGMatch //IActorMatchResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+

@@ -11,6 +11,7 @@ namespace ET
     {
         protected override void Run(UpdateRoom a)
         {
+            Log.Debug("UpdateRoom");
             a.zoneScene.GetComponent<UIComponent>()?.HideWindow(WindowID.WindowID_GameMain);
             a.zoneScene.GetComponent<UIComponent>()?.ShowWindow(WindowID.WindowID_Room);
         }

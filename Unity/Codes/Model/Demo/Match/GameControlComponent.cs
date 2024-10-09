@@ -24,9 +24,12 @@ namespace ET
     public class GameControlComponent:Entity,IAwake,IDestroy
     {
         public int SelectHardCard = 0;
+        public int SelectSkillCard = 0;
 
-        public List<UseCard> UseCardList;
-        public List<StageCard> StageCardList;
+        public List<UseCardProto> UseCardList;
+        public List<StageCardProto> StageCardList;
+
+        public List<PlayerRoundResult> PlayerRoundResultList;
 
 
     }

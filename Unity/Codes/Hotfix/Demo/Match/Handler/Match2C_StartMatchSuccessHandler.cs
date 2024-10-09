@@ -16,29 +16,38 @@ namespace ET
 
             session.ZoneScene().GetComponent<Room>().AddComponent<GameControlComponent>();
 
-            DeckComponent deckComponent = gamer1.AddComponent<DeckComponent>();
-            gamer2.AddComponent<DeckComponent>();
+            DeckComponent deckComponent1 = gamer1.AddComponent<DeckComponent>();
+            DeckComponent deckComponent2 = gamer2.AddComponent<DeckComponent>();
             long myid = session.ZoneScene().GetComponent<PlayerComponent>().MyId;
-            if (message.UnitId1 == myid)
+            foreach (var proto in message.Proto)
             {
-                gamer1.Name = message.Name1;
-                gamer1.MMR = message.MMR1;
-                gamer1.UserID = message.UnitId1;
-                gamer2.Name = message.Name2;
-                gamer2.MMR = message.MMR2;
-                gamer2.UserID = message.UnitId2;
-                
+                if (proto.UnitId == myid)
+                {
+                    gamer1.Name = proto.Name;
+                    gamer1.MMR = proto.MMR;
+                    gamer1.UserID = proto.UnitId;
+                    deckComponent1.TowerHP = proto.TowerHp;
+                    deckComponent1.Coin = proto.Coin;
+                    
+                }
+                else if (proto.UnitId != myid)
+                {
+                    gamer2.Name = proto.Name;
+                    gamer2.MMR = proto.MMR;
+                    gamer2.UserID = proto.UnitId;
+                    deckComponent2.TowerHP = proto.TowerHp;
+                    deckComponent2.Coin = proto.Coin;
+                    for (int i = 0; i < proto.CardNum; i++)
+                    {
+                        NotStageCard card = new NotStageCard();
+                        card.CardId = -1;
+                        card.Star = -1;
+                        deckComponent2.HardDeck.Add(card);
+                    }
+                }
             }
-            else if (message.UnitId2 == myid)
-            {
-                gamer1.Name = message.Name2;
-                gamer1.MMR = message.MMR2;
-                gamer1.UserID = message.UnitId2;
-                gamer2.Name = message.Name1;
-                gamer2.MMR = message.MMR1;
-                gamer2.UserID = message.UnitId1;
-            }
-            deckComponent.HardDeck = message.HeroCardList;
+            deckComponent1.HardDeck = message.HeroCardList;
+
 
 
             session.ZoneScene().GetComponent<Room>().Add(gamer1);
